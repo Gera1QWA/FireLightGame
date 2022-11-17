@@ -69,10 +69,10 @@ class Level extends Phaser.Scene{
         this.bgs[1].x = this.bgs[0].displayWidth;
         const keyCodes = Phaser.Input.Keyboard.KeyCodes;
         const eventos = Phaser.Input.Events;
-        this.puertas[10];
-        for(let index = 0; index < this.puertas.length; index++) {
-            this.puertas[index] = this.add.image(i*100, 200, 'puertaCerrada');
-            this.puertas.setScale(0.3);
+        this.puertas = [];
+        for(let index = 0; index < 10; index++) {
+            this.puertas[index] = this.add.image(index*300, 770, "puertaCerrada").setOrigin(1, 1).setDepth(0);
+            this.puertas[index].setScale(0.6);
         }
         this.suelo = this.physics.add.image(300, 800, 'BlockBlock');
         this.suelo.body.setAllowGravity(false);

@@ -1,7 +1,6 @@
-import Level from "./scenes/Level.js"
-import Bootloader from "./scenes/Bootloader.js"
-import Start from "./scenes/Start.js"
-import Map from "./scenes/Map.js";
+import Level from "../scenes/Level.js"
+import Start from "../scenes/Start.js"
+import Map from "../scenes/Map.js";
 
 
 const config = {
@@ -26,7 +25,6 @@ const config = {
     backgroundColor: "#000000", 	//Color de fondo del canvas ()
     scene: [
         Start,
-        Bootloader,
         Level, 
         Map],    //Aquí irá la lista de scenas del juego
     banner:{

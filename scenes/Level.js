@@ -20,7 +20,7 @@ class Level extends Phaser.Scene{
     
     preload() {
         this.load.path = './assets/';
-        this.load.image(['Puntero','Level1Sotano', 'lineBlock', 'BlockBlock'
+        this.load.image(['Puntero','Map2', 'lineBlock', 'BlockBlock', 'puertaCerrada'
         ]);
 
         this.load.spritesheet('king','Medieval King/Sprites/Idle.png',
@@ -63,14 +63,17 @@ class Level extends Phaser.Scene{
 
     create(){
         this.bgs = [
-            this.add.image(0, 0, "Level1Sotano").setOrigin(0, 0).setDepth(-1),
-            this.add.image(0, 0, "Level1Sotano").setOrigin(0, 0).setDepth(-1),
+            this.add.image(0, 0, "Map2").setOrigin(0, 0).setDepth(-1),
+            this.add.image(0, 0, "Map2").setOrigin(0, 0).setDepth(-1),
         ];
         this.bgs[1].x = this.bgs[0].displayWidth;
         const keyCodes = Phaser.Input.Keyboard.KeyCodes;
         const eventos = Phaser.Input.Events;
-
-
+        this.puertas[10];
+        for(let index = 0; index < this.puertas.length; index++) {
+            this.puertas[index] = this.add.image(i*100, 200, 'puertaCerrada');
+            this.puertas.setScale(0.3);
+        }
         this.suelo = this.physics.add.image(300, 800, 'BlockBlock');
         this.suelo.body.setAllowGravity(false);
         this.suelo.setImmovable();

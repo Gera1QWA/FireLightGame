@@ -20,7 +20,7 @@ class Level extends Phaser.Scene{
     
     preload() {
         this.load.path = './assets/';
-        this.load.image(['Puntero','Map2', 'lineBlock', 'BlockBlock', 'puertaCerrada'
+        this.load.image(['Puntero','Map2', 'lineBlock', 'BlockBlock', 'puertaCerrada', 'antorchab1'
         ]);
 
         this.load.spritesheet('king','Medieval King/Sprites/Idle.png',
@@ -53,12 +53,20 @@ class Level extends Phaser.Scene{
             frameHeight: 111
         })
         
+        // this.load.spritesheet('antorchab','antorchab/antorchab/antorchab.png',
+        // {
+        //     frameWidth: 160,
+        //     frameHeight: 111
+        // });
+
         this.load.atlas('hearts','hearts/hearts.png','hearts/hearts_atlas.json');
         this.load.animation('heartsAnim','hearts/hearts_anim.json');
         this.load.atlas('potions','potions/potions.png','potions/potions_atlas.json');
         this.load.animation('potionsAnim','potions/potions_anim.json');
         this.load.atlas('pinchos', 'pinchos/pinchos.png','pinchos/pinchos_atlas.json');
         this.load.animation('pinchosAnim','pinchos/pinchos_anim.json');
+        this.load.atlas('antorchab','antorchab/antorchab/antorchab.png','antorchab/antorchab/antorchab_atlas.json');
+        this.load.animation('antorchabAnim', 'antorchab/antorchab_anim/antorchab_anim.json');
     }
 
     create(){
@@ -69,6 +77,12 @@ class Level extends Phaser.Scene{
         this.bgs[1].x = this.bgs[0].displayWidth;
         const keyCodes = Phaser.Input.Keyboard.KeyCodes;
         const eventos = Phaser.Input.Events;
+        this.antorchas = [];
+        for(let index = 0; index < 10; index++) {
+            this.antorchas[index] = this.add.sprite((index*430 )+ 100, 360, 'antorchab', 0);
+            // this.antorchas[index] = this.add.image(index*230, 420, "antorchab1").setOrigin(1, 1).setDepth(0);
+            this.antorchas[index].setScale(4);
+        }
         this.puertas = [];
         for(let index = 0; index < 10; index++) {
             this.puertas[index] = this.add.image(index*300, 770, "puertaCerrada").setOrigin(1, 1).setDepth(0);
@@ -173,6 +187,20 @@ class Level extends Phaser.Scene{
             frameRate: 2
         });
 
+        // this.anims.create({
+        //     // Nombre de la animación
+        //     key: 'antorchab_iddle',
+        //     // Se cargan los frames por números
+        //     // NOTA: generateFrameNames() se
+        //     // usa cuando ya existe un Atlas
+        //     frames: this.anims.generateFrameNumbers('antorchab', {
+        //         start: 0,
+        //         end: 5
+        //     }),
+        //     repeat: -1,
+        //     frameRate: 6
+        // });
+        
         this.teclas = this.input.keyboard.addKeys({
             izq: keyCodes.A,
             der: keyCodes.D,
@@ -370,7 +398,9 @@ class Level extends Phaser.Scene{
             console.log("colision rey con pinchos");
         });
         this.grupoO4.playAnimation('pinchos');
-
+        for (let index = 0; index < 10; index++) {
+            this.antorchas[index].anims.play('antorchab'); 
+        }
         
     }
     update(time, delta) {

@@ -1,0 +1,36 @@
+{
+    "anims": [
+        {
+            "key": "antorchab",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "antorchab",
+                    "frame": "antorchab1"
+                },
+                {
+                    "key": "antorchab",
+                    "frame": "antorchab2"
+                },
+                {
+                    "key": "antorchab",
+                    "frame": "antorchab3"
+                },
+                {
+                    "key": "antorchab",
+                    "frame": "antorchab4"
+                },
+                {
+                    "key": "antorchab",
+                    "frame": "antorchab5"
+                },
+                {
+                    "key": "antorchab",
+                    "frame": "antorchab6"
+                }
+            ]
+        }
+    ]
+}

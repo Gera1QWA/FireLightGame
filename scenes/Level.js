@@ -20,7 +20,7 @@ class Level extends Phaser.Scene{
     
     preload() {
         this.load.path = './assets/';
-        this.load.image(['Puntero','Map2', 'lineBlock', 'BlockBlock', 'puertaCerrada', 'antorchab1'
+        this.load.image(['Puntero','Map2', 'lineBlock', 'BlockBlock', 'puertaCerrada', 'antorchab1', 'cofreestatico'
         ]);
 
         this.load.spritesheet('king','Medieval King/Sprites/Idle.png',
@@ -67,6 +67,8 @@ class Level extends Phaser.Scene{
         this.load.animation('pinchosAnim','pinchos/pinchos_anim.json');
         this.load.atlas('antorchab','antorchab/antorchab/antorchab.png','antorchab/antorchab/antorchab_atlas.json');
         this.load.animation('antorchabAnim', 'antorchab/antorchab_anim/antorchab_anim.json');
+        this.load.atlas('cofreanimado','cofre/cofreanimado/cofreanimado.png','cofre/cofreanimado/cofreanimado_atlas.json');
+        this.load.animation('cofreAnim', 'cofre/cofreanimado_anim/cofreanimado_anim.json');
     }
 
     create(){
@@ -88,6 +90,7 @@ class Level extends Phaser.Scene{
             this.puertas[index] = this.add.image(index*300, 770, "puertaCerrada").setOrigin(1, 1).setDepth(0);
             this.puertas[index].setScale(0.6);
         }
+        this.cofre = this.add.sprite(430, 360, 'cofreanimado', 0);
         this.suelo = this.physics.add.image(300, 800, 'BlockBlock');
         this.suelo.body.setAllowGravity(false);
         this.suelo.setImmovable();
@@ -401,7 +404,7 @@ class Level extends Phaser.Scene{
         for (let index = 0; index < 10; index++) {
             this.antorchas[index].anims.play('antorchab'); 
         }
-        
+        this.cofre.anims.play('cofreanimado');
     }
     update(time, delta) {
         if (this.teclas.der.isDown)

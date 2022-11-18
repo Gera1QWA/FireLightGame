@@ -1,0 +1,47 @@
+{
+    "frames": [
+        {
+            "filename": "cofreanimado1",
+            "frame": {
+                "w": 220,
+                "h": 368,
+                "x": 0,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "cofreanimado2",
+            "frame": {
+                "w": 220,
+                "h": 368,
+                "x": 220,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        },
+        {
+            "filename": "cofreanimado3",
+            "frame": {
+                "w": 220,
+                "h": 368,
+                "x": 440,
+                "y": 0
+            },
+            "anchor": {
+                "x": 0.5,
+                "y": 0.5
+            }
+        }
+    ],
+    "meta": {
+        "description": "Atlas generado con Atlas Packer Gamma V2",
+        "web": "https://gammafp.github.io/atlas-packer-phaser/"
+    }
+}

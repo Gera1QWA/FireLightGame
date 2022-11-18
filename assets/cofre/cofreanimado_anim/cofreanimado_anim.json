@@ -1,0 +1,24 @@
+{
+    "anims": [
+        {
+            "key": "cofreanimado",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 6,
+            "frames": [
+                {
+                    "key": "cofreanimado",
+                    "frame": "cofreanimado1"
+                },
+                {
+                    "key": "cofreanimado",
+                    "frame": "cofreanimado2"
+                },
+                {
+                    "key": "cofreanimado",
+                    "frame": "cofreanimado3"
+                }
+            ]
+        }
+    ]
+}

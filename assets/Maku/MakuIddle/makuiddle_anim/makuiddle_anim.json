@@ -1,0 +1,44 @@
+{
+    "anims": [
+        {
+            "key": "makuiddle",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 12,
+            "frames": [
+                {
+                    "key": "makuiddle",
+                    "frame": "fila-1-columna-1_witch"
+                },
+                {
+                    "key": "makuiddle",
+                    "frame": "fila-1-columna-2_witch"
+                },
+                {
+                    "key": "makuiddle",
+                    "frame": "fila-1-columna-3_witch"
+                },
+                {
+                    "key": "makuiddle",
+                    "frame": "fila-1-columna-4_witch"
+                },
+                {
+                    "key": "makuiddle",
+                    "frame": "fila-1-columna-5_witch"
+                },
+                {
+                    "key": "makuiddle",
+                    "frame": "fila-1-columna-6_witch"
+                },
+                {
+                    "key": "makuiddle",
+                    "frame": "fila-1-columna-7_witch"
+                },
+                {
+                    "key": "makuiddle",
+                    "frame": "fila-1-columna-8_witch"
+                }
+            ]
+        }
+    ]
+}

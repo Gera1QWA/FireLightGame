@@ -1,0 +1,36 @@
+{
+    "anims": [
+        {
+            "key": "puerta",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 8,
+            "frames": [
+                {
+                    "key": "puerta",
+                    "frame": "fila-1-columna-1_(3)"
+                },
+                {
+                    "key": "puerta",
+                    "frame": "fila-1-columna-2_(1)"
+                },
+                {
+                    "key": "puerta",
+                    "frame": "fila-1-columna-3_(1)"
+                },
+                {
+                    "key": "puerta",
+                    "frame": "fila-1-columna-4_(1)"
+                },
+                {
+                    "key": "puerta",
+                    "frame": "fila-1-columna-5_(1)"
+                },
+                {
+                    "key": "puerta",
+                    "frame": "fila-1-columna-6"
+                }
+            ]
+        }
+    ]
+}

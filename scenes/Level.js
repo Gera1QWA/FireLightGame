@@ -20,8 +20,8 @@ class Level extends Phaser.Scene{
     
     preload() {
         this.load.path = './assets/';
-        this.load.image(['Puntero','Map2', 'lineBlock', 'BlockBlock', 'puertaCerrada', 'antorchab1', 'cofreestatico',
-        'cuadro', 'cuadrodragon'
+        this.load.image(['Puntero','Map2', 'lineBlock', 'BlockBlock', 'antorchab1', 'cofreestatico',
+        'cuadro', 'cuadrodragon', 'puertaclosed'
         ]);
 
         this.load.spritesheet('king','Medieval King/Sprites/Idle.png',
@@ -70,6 +70,8 @@ class Level extends Phaser.Scene{
         this.load.animation('antorchabAnim', 'antorchab/antorchab_anim/antorchab_anim.json');
         this.load.atlas('cofreanimado','cofre/cofreanimado/cofreanimado.png','cofre/cofreanimado/cofreanimado_atlas.json');
         this.load.animation('cofreAnim', 'cofre/cofreanimado_anim/cofreanimado_anim.json');
+        this.load.atlas('puerta','puerta/puerta/puerta.png','puerta/puerta/puerta_atlas.json');
+        this.load.animation('puertaAnim', 'puerta/puerta_anim/puerta_anim.json');
     }
 
     create(){
@@ -93,8 +95,10 @@ class Level extends Phaser.Scene{
         //Creacion Puertas
         this.puertas = [];
         for(let index = 0; index < 10; index++) {
-            this.puertas[index] = this.add.image(index*1000, 770, "puertaCerrada").setOrigin(1, 1).setDepth(0);
-            this.puertas[index].setScale(0.6);
+            // this.puertas[index] = this.add.image(index*1000, 770, "puertaCerrada").setOrigin(1, 1).setDepth(0);
+            //this.puertas[index].setScale(0.6);
+            this.puertas[index] = this.add.sprite((index*1100)+300, 530, "puertaclosed").setDepth(0);
+            this.puertas[index].setScale(2.4);
         }
 
         //Creacion de cofre de prueba
@@ -413,6 +417,7 @@ class Level extends Phaser.Scene{
         for (let index = 0; index < 10; index++) {
             this.antorchas[index].anims.play('antorchab'); 
         }
+        this.puertas[0].anims.play('puerta');
         //animacion de cofre
         this.cofre.anims.play('cofreanimado');
     }

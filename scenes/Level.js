@@ -75,6 +75,9 @@ class Level extends Phaser.Scene{
     }
 
     create(){
+        this.cameras.main.setBackgroundColor(0x0000ff)
+        // tiempo en milisegundos
+        .fadeIn(2000);
         this.bgs = [
             this.add.image(0, 0, "Map2").setOrigin(0, 0).setDepth(-1),
             this.add.image(0, 0, "Map2").setOrigin(0, 0).setDepth(-1),
@@ -97,8 +100,10 @@ class Level extends Phaser.Scene{
         for(let index = 0; index < 10; index++) {
             // this.puertas[index] = this.add.image(index*1000, 770, "puertaCerrada").setOrigin(1, 1).setDepth(0);
             //this.puertas[index].setScale(0.6);
-            this.puertas[index] = this.add.sprite((index*1100)+300, 530, "puertaclosed").setDepth(0);
-            this.puertas[index].setScale(2.4);
+            if(index%2==0){
+                this.puertas[index] = this.add.sprite((index*1100)+300, 530, "puertaclosed").setDepth(0);
+                this.puertas[index].setScale(2.4);
+            }
         }
 
         //Creacion de cofre de prueba
@@ -411,13 +416,19 @@ class Level extends Phaser.Scene{
             // this.king.setVelocity(0);
             // this.king.setAcceleration(0);
             console.log("colision rey con pinchos");
+            this.cameras.main
+            .setBackgroundColor(0x000000)
+            //.fadeOut(500);
+            // tiempo en milisegundos, intensidad en [0,1]
+            .shake(500, 0.03);
+            //this.cameras.main.fadeIn(500);
         });
         this.grupoO4.playAnimation('pinchos');
 
         for (let index = 0; index < 10; index++) {
             this.antorchas[index].anims.play('antorchab'); 
         }
-        this.puertas[0].anims.play('puerta');
+       
         //animacion de cofre
         this.cofre.anims.play('cofreanimado');
     }
@@ -493,7 +504,16 @@ class Level extends Phaser.Scene{
         if (this.teclas.kspc.isDown) {
             
         }
-
+        if(this.teclas.kspc.isDown && this.king.x >= 300 && this.king.x <= 300 + 50)
+        {
+            this.puertas[0].anims.play('puerta');
+            this.cameras.main
+            .fadeOut(1000);
+            setTimeout(() => {
+                this.scene.start('Start');
+            }, 1300);
+            
+        }
         // if(this.king.x >= 450 && //this.grupo.getChildren()[0].x
         // this.king.x <= 450 + 50) //this.grupo.getChildren()[0].x
         // {

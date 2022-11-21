@@ -8,12 +8,6 @@ class Room1 extends Phaser.Scene{
         this.width = this.sys.game.canvas.width;
         this.height = this.sys.game.canvas.height;
 
-        this.minScale = 0.75;
-        this.maxScale = 1;
-        this.deckSizeDelta = 0.05;
-
-        this.bgDelta = 2;
-
     }
     
     preload() {
@@ -64,8 +58,7 @@ class Room1 extends Phaser.Scene{
         this.load.animation('heartsAnim','hearts/hearts_anim.json');
         this.load.atlas('potions','potions/potions.png','potions/potions_atlas.json');
         this.load.animation('potionsAnim','potions/potions_anim.json');
-        this.load.atlas('antorchab','antorchab/antorchab/antorchab.png','antorchab/antorchab/antorchab_atlas.json');
-        this.load.animation('antorchabAnim', 'antorchab/antorchab_anim/antorchab_anim.json');
+
         this.load.atlas('puerta','puerta/puerta/puerta.png','puerta/puerta/puerta_atlas.json');
         this.load.animation('puertaAnim', 'puerta/puerta_anim/puerta_anim.json');
     }

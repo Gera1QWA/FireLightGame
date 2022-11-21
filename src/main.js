@@ -26,7 +26,8 @@ const config = {
     backgroundColor: "#000000", 	//Color de fondo del canvas ()
     scene: [
         Start,
-        Level, 
+        Level,
+        Room1, 
         Map],    //Aquí irá la lista de scenas del juego
     banner:{
         hidePhaser: true,

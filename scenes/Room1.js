@@ -1,4 +1,4 @@
-class Level extends Phaser.Scene{
+class Room1 extends Phaser.Scene{
     constructor(){
         super({ key: 'Room1' });
     }
@@ -7,23 +7,23 @@ class Level extends Phaser.Scene{
         console.log('Escena Level');
         this.width = this.sys.game.canvas.width;
         this.height = this.sys.game.canvas.height;
-        this.maximo=690;
-        this.minimo=0;
-        this.direc=true;
 
-        //this.minScale = 0.75;
-        //this.maxScale = 1;
-        //this.deckSizeDelta = 0.05;
+        this.minScale = 0.75;
+        this.maxScale = 1;
+        this.deckSizeDelta = 0.05;
 
-      //  this.bgDelta = 2;
+        this.bgDelta = 2;
+
     }
     
     preload() {
         this.load.path = './assets/';
-        this.load.image(['Puntero','fondocuartos/cuartov1', 'antorchab1',,
+        this.load.image(['Puntero', 'antorchab1',
         'cuadro', 'cuadrodragon', 'puertaclosed'
         ]);
 
+        this.load.image('cuartov1','fondocuartos/cuartov1.png');
+       
         this.load.spritesheet('king','Medieval King/Sprites/Idle.png',
         {
             frameWidth: 160,
@@ -71,39 +71,40 @@ class Level extends Phaser.Scene{
     }
 
     create(){
-        // this.cameras.main.setBackgroundColor(0x0000ff)
-        // // tiempo en milisegundos
-        // .fadeIn(2000);
-        this.bgs = [
-            this.add.image(0, 0, "cuartov1").setOrigin(0, 0).setDepth(-1),
-            this.add.image(0, 0, "cuartov1").setOrigin(0, 0).setDepth(-1),
-        ];
-        this.bgs[1].x = this.bgs[0].displayWidth;
+        this.cameras.main.setBackgroundColor(0x0000ff)
+        // tiempo en milisegundos
+        .fadeIn(2000);
+        this.fondo1 = this.add.image(0, 0, "cuartov1").setOrigin(0, 0).setDepth(-1).setScale(1.0);
+
+        // this.bgs = [
+        //     this.add.image(0, 0, "cuartov1").setOrigin(0, 0).setDepth(-1),
+        //     this.add.image(0, 0, "cuartov1").setOrigin(0, 0).setDepth(-1),
+        // ];
+        // this.bgs[1].x = this.bgs[0].displayWidth;
         const keyCodes = Phaser.Input.Keyboard.KeyCodes;
         const eventos = Phaser.Input.Events;
-
+        
         //Creacion Antorchas
-        this.antorchas = [];
-        for(let index = 0; index < 10; index++) {
-            this.antorchas[index] = this.add.sprite((index*430 )+ 100, 360, 'antorchab', 0);
-            // this.antorchas[index] = this.add.image(index*230, 420, "antorchab1").setOrigin(1, 1).setDepth(0);
-            this.antorchas[index].setScale(4);
-        }
+        // this.antorchas = [];
+        // for(let index = 0; index < 10; index++) {
+        //     this.antorchas[index] = this.add.sprite((index*430 )+ 100, 360, 'antorchab', 0);
+        //     // this.antorchas[index] = this.add.image(index*230, 420, "antorchab1").setOrigin(1, 1).setDepth(0);
+        //     this.antorchas[index].setScale(4);
+        // }
         //Creacion cuadro
         this.cuadro = this.add.image(650, 400, 'cuadro').setScale(0.15).setDepth(0);
         //Creacion Puertas
-        this.puertas = [];
-        for(let index = 0; index < 10; index++) {
+        // for(let index = 0; index < 10; index++) {
             // this.puertas[index] = this.add.image(index*1000, 770, "puertaCerrada").setOrigin(1, 1).setDepth(0);
             //this.puertas[index].setScale(0.6);
-            if(index%2==0){
-                this.puertas[index] = this.add.sprite((index*1100)+300, 530, "puertaclosed").setDepth(0);
-                this.puertas[index].setScale(2.4);
-            }
-        }
+            // if(index%2==0){
+                this.puerta = this.add.sprite(100, 380, "puertaclosed").setDepth(0);
+                this.puerta.setScale(1.4);
+        //     }
+        // }
 
         //Creacion de cofre de prueba
-        this.cofre = this.add.sprite(1100, 680, 'cofreanimado', 0).setScale(0.8);
+        // this.cofre = this.add.sprite(1100, 680, 'cofreanimado', 0).setScale(0.8);
         
         this.suelo = this.physics.add.image(300, 800, 'BlockBlock');
         this.suelo.body.setAllowGravity(false);
@@ -297,20 +298,20 @@ class Level extends Phaser.Scene{
         this.grupo.getChildren()[4].visible = false;
         this.grupo.getChildren()[5].visible = false;
 
-        this.grupoC = this.physics.add.group({
-            key: 'hearts',
-            repeat: 2,
-            setXY: {
-                x: 1000,
-                y: 700,
-                stepX: 750
-            }
-        });
-        this.grupoC.children.iterate((corazon) => {
-            corazon.setScale(1);
-            corazon.body.setAllowGravity(false);
-        });
-        this.grupoC.playAnimation('hearts');
+        // this.grupoC = this.physics.add.group({
+        //     key: 'hearts',
+        //     repeat: 2,
+        //     setXY: {
+        //         x: 1000,
+        //         y: 700,
+        //         stepX: 750
+        //     }
+        // });
+        // this.grupoC.children.iterate((corazon) => {
+        //     corazon.setScale(1);
+        //     corazon.body.setAllowGravity(false);
+        // });
+        // this.grupoC.playAnimation('hearts');
 
         //Grupo de pociones
         this.grupo2 = this.physics.add.group({
@@ -390,9 +391,9 @@ class Level extends Phaser.Scene{
         // });
 
         //Grupo de pinchos
-        for (let index = 0; index < 10; index++) {
-            this.antorchas[index].anims.play('antorchab'); 
-        }
+        // for (let index = 0; index < 10; index++) {
+        //     this.antorchas[index].anims.play('antorchab'); 
+        // }
        
 
     }
@@ -401,4 +402,4 @@ class Level extends Phaser.Scene{
     }
 }
 
-export default Level;
+export default Room1;

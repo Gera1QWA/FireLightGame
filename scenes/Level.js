@@ -510,7 +510,7 @@ class Level extends Phaser.Scene{
             this.cameras.main
             .fadeOut(1000);
             setTimeout(() => {
-                this.scene.start('Start');
+                this.scene.start('Room1');
             }, 1300);
             
         }

@@ -1,3 +1,4 @@
+import Room1 from "../scenes/Room1.js"
 import Level from "../scenes/Level.js"
 import Start from "../scenes/Start.js"
 import Map from "../scenes/Map.js";

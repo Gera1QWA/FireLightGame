@@ -29,18 +29,10 @@ class Room4 extends Phaser.Scene {
     }
 
     create(){
-        // this.scene.stop('Level');
-        // // this.cameras.main.setBackgroundColor(0x0000ff)
-        // // // tiempo en milisegundos
-        // // .fadeIn(2000);
 
         
 
         this.fondo = this.add.image(0, 0, "redroom").setOrigin(0, 0).setDepth(-1);
-
-
-        // const keyCodes = Phaser.Input.Keyboard.KeyCodes;
-        // // const eventos = Phaser.Input.Events;
 
 
 

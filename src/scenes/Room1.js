@@ -29,6 +29,9 @@ class Room1 extends Phaser.Scene {
     }
 
     create(){
+        this.cameras.main.setBackgroundColor(0x000000)
+        // tiempo en milisegundos
+        .fadeIn(2000);
         // this.scene.stop('Level');
         // // this.cameras.main.setBackgroundColor(0x0000ff)
         // // // tiempo en milisegundos

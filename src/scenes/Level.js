@@ -231,7 +231,8 @@ class Level extends Phaser.Scene{
             der: keyCodes.D,
             powQ: keyCodes.Q,
             powR: keyCodes.R,
-            kspc: keyCodes.SPACE
+            kspc: keyCodes.SPACE,
+            powX: keyCodes.X
         });
 
         this.teclas.izq.on('down', ()=>{
@@ -285,6 +286,30 @@ class Level extends Phaser.Scene{
             this.king.body.setVelocityY(800);
         });
 
+        // this.teclas.powX.on('down', ()=>{
+            
+        //     this.cameras.main
+        //     .fadeOut(1000);
+        //     setTimeout(() => {
+        //         this.scene.start("Room4", {
+        //         });
+        //     }, 1300);
+        //             // this.scene.start("Room4", {
+        //             // });
+
+        //                     // if(this.teclas.kspc.isDown && this.king.x >= 300 && this.king.x <= 300 + 50)
+        // // {
+        // //     this.puertas[0].anims.play('puerta');
+        // //     this.cameras.main
+        // //     .fadeOut(1000);
+        // //     setTimeout(() => {
+        // //         this.scene.start('Room4',500);
+        // //     }, 1300);
+            
+        // // }
+                
+            
+        // });
         //Grupo de corazones
         this.grupo = this.physics.add.group({
             key: 'hearts',
@@ -540,12 +565,20 @@ class Level extends Phaser.Scene{
         }
         if(this.teclas.kspc.isDown && this.king.x >= 300 && this.king.x <= 300 + 50)
         {
+            // setInterval(() => {
+            //     console.log("esta haciendo algo");
+            //     this.puertas[0].anims.play('puerta');
+                
+            // }, 1500);
+            
             this.puertas[0].anims.play('puerta');
-            this.cameras.main
-            .fadeOut(1000);
-            setTimeout(() => {
-                this.scene.start('Room4',500);
-            }, 1300);
+            // setTimeout(() => {
+                    escena("Room1",this.scene);
+
+            // }, 1500);
+                // this.scene.start("Room1", {
+                // });
+       
             
         }
         // if(this.king.x >= 450 && //this.grupo.getChildren()[0].x
@@ -580,6 +613,10 @@ class Level extends Phaser.Scene{
             // this.grupo.getChildren()[5].visible = true;
         }
     }
-}
 
+}
+function escena(params, params2) {
+    params2.start(params,{
+    });
+}
 export default Level;

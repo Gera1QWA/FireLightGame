@@ -1,6 +1,6 @@
-class Room1 extends Phaser.Scene {
+class Room4 extends Phaser.Scene {
     constructor() {
-        super({ key: 'Room1' });
+        super({ key: 'Room4' });
     }
 
     init() {
@@ -24,7 +24,7 @@ class Room1 extends Phaser.Scene {
         this.load.path = './assets/';
         this.load.image(['Puntero']);
 
-        this.load.image('blueroom', 'scenaroom/blueroom.png');
+        this.load.image('redroom', 'scenaroom/redroom.png');
 
     }
 
@@ -36,7 +36,7 @@ class Room1 extends Phaser.Scene {
 
         
 
-        this.fondo = this.add.image(0, 0, "blueroom").setOrigin(0, 0).setDepth(-1);
+        this.fondo = this.add.image(0, 0, "redroom").setOrigin(0, 0).setDepth(-1);
 
 
         // const keyCodes = Phaser.Input.Keyboard.KeyCodes;
@@ -49,4 +49,4 @@ class Room1 extends Phaser.Scene {
     }
 }
 
-export default Room1;
+export default Room4;

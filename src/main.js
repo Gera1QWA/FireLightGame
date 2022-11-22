@@ -1,7 +1,10 @@
 import Start from "./scenes/Start.js"
 import Map from "./scenes/Map.js"
 import Level from "./scenes/Level.js"
-import Room1 from "./scenes/Room1.js";
+import Room1 from "./scenes/Room1.js"
+import Room2 from "./scenes/Room2.js"
+import Room3 from "./scenes/Room3.js"
+import Room4 from "./scenes/Room4.js";
 
 
 
@@ -29,7 +32,10 @@ const config = {
         Start,
         Level, 
         Map,
-        Room1],    //Aquí irá la lista de scenas del juego
+        Room1,
+        Room2,
+        Room3,
+        Room4],    //Aquí irá la lista de scenas del juego
     banner:{
         hidePhaser: true,
         text: "#fff00f",

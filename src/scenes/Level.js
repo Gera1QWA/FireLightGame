@@ -148,6 +148,7 @@ class Level extends Phaser.Scene{
                 start: 0,
                 end: 7
             }),
+            
             repeat: -1,
             frameRate: 6
         });
@@ -573,7 +574,7 @@ class Level extends Phaser.Scene{
             
             this.puertas[0].anims.play('puerta');
             // setTimeout(() => {
-                    escena("Room1",this.scene);
+                    escena("Room2",this.scene);
 
             // }, 1500);
                 // this.scene.start("Room1", {

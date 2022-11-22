@@ -1,8 +1,6 @@
 class Level extends Phaser.Scene{
     constructor(){
-        super({
-            key: 'Level'
-        });
+        super({ key: 'Level' });
     }
 
     init() {
@@ -13,17 +11,20 @@ class Level extends Phaser.Scene{
         this.minimo=0;
         this.direc=true;
 
-        //this.minScale = 0.75;
-        //this.maxScale = 1;
-        //this.deckSizeDelta = 0.05;
-
-      //  this.bgDelta = 2;
     }
     
     preload() {
         this.load.path = './assets/';
-        this.load.image(['Puntero','Level1Sotano', 'lineBlock', 'BlockBlock'
-        ]);
+        this.load.image(['Puntero']);
+
+        this.load.image('Map2', 'scenalevel/mapa2.png');
+        this.load.image('lineBlock', 'scenalevel/lineBlock.png');
+        this.load.image('BlockBlock', 'scenalevel/blockBlock.png');
+        this.load.image('antorchab1', 'scenalevel/antorchab1.png');
+        this.load.image('cofreestatico', 'scenalevel/cofreestatico.png');
+        this.load.image('cuadro', 'scenalevel/cuadro.png');
+        this.load.image('cuadrodragon', 'scenalevel/cuadrodragon.png');
+        this.load.image('puertaclosed', 'scenalevel/puertaclosed.png');
 
         this.load.spritesheet('king','Medieval King/Sprites/Idle.png',
         {
@@ -55,24 +56,62 @@ class Level extends Phaser.Scene{
             frameHeight: 111
         })
         
+        // this.load.spritesheet('antorchab','antorchab/antorchab/antorchab.png',
+        // {
+        //     frameWidth: 160,
+        //     frameHeight: 111
+        // });
+
         this.load.atlas('hearts','hearts/hearts.png','hearts/hearts_atlas.json');
         this.load.animation('heartsAnim','hearts/hearts_anim.json');
         this.load.atlas('potions','potions/potions.png','potions/potions_atlas.json');
         this.load.animation('potionsAnim','potions/potions_anim.json');
         this.load.atlas('pinchos', 'pinchos/pinchos.png','pinchos/pinchos_atlas.json');
         this.load.animation('pinchosAnim','pinchos/pinchos_anim.json');
+        this.load.atlas('antorchab','antorchab/antorchab/antorchab.png','antorchab/antorchab/antorchab_atlas.json');
+        this.load.animation('antorchabAnim', 'antorchab/antorchab_anim/antorchab_anim.json');
+        this.load.atlas('cofreanimado','cofre/cofreanimado/cofreanimado.png','cofre/cofreanimado/cofreanimado_atlas.json');
+        this.load.animation('cofreAnim', 'cofre/cofreanimado_anim/cofreanimado_anim.json');
+        this.load.atlas('puerta','puerta/puerta/puerta.png','puerta/puerta/puerta_atlas.json');
+        this.load.animation('puertaAnim', 'puerta/puerta_anim/puerta_anim.json');
     }
 
     create(){
+       
+        this.cameras.main.setBackgroundColor(0x000000)
+        // tiempo en milisegundos
+        .fadeIn(2000);
         this.bgs = [
-            this.add.image(0, 0, "Level1Sotano").setOrigin(0, 0).setDepth(-1),
-            this.add.image(0, 0, "Level1Sotano").setOrigin(0, 0).setDepth(-1),
+            this.add.image(0, 0, "Map2").setOrigin(0, 0).setDepth(-1),
+            this.add.image(0, 0, "Map2").setOrigin(0, 0).setDepth(-1),
         ];
         this.bgs[1].x = this.bgs[0].displayWidth;
         const keyCodes = Phaser.Input.Keyboard.KeyCodes;
         const eventos = Phaser.Input.Events;
 
+        //Creacion Antorchas
+        this.antorchas = [];
+        for(let index = 0; index < 10; index++) {
+            this.antorchas[index] = this.add.sprite((index*430 )+ 100, 360, 'antorchab', 0);
+            // this.antorchas[index] = this.add.image(index*230, 420, "antorchab1").setOrigin(1, 1).setDepth(0);
+            this.antorchas[index].setScale(4);
+        }
+        //Creacion cuadro
+        this.cuadro = this.add.image(800, 400, 'cuadro').setScale(0.15).setDepth(0);
+        //Creacion Puertas
+        this.puertas = [];
+        for(let index = 0; index < 10; index++) {
+            // this.puertas[index] = this.add.image(index*1000, 770, "puertaCerrada").setOrigin(1, 1).setDepth(0);
+            //this.puertas[index].setScale(0.6);
+            // if(index%2==0){
+                this.puertas[index] = this.add.sprite((index*1100)+300, 530, "puertaclosed").setDepth(0);
+                this.puertas[index].setScale(2.4);
+            // }
+        }
 
+        //Creacion de cofre de prueba
+        //this.cofre = this.add.sprite(1100, 680, 'cofreanimado', 0).setScale(0.8);
+        
         this.suelo = this.physics.add.image(300, 800, 'BlockBlock');
         this.suelo.body.setAllowGravity(false);
         this.suelo.setImmovable();
@@ -81,7 +120,7 @@ class Level extends Phaser.Scene{
         this.suelo.setVisible(false);
         //FISICAS KING
         //this.king = this.add.sprite(300, 520, 'king', 0).setScale(5);
-        this.king = this.physics.add.image(300, 520, 'king').setScale(5);
+        this.king = this.physics.add.image(1000, 520, 'king').setScale(5);
         //this.physics.add.existing(this.king, true); //FORMA2 true
         this.king.body.setCollideWorldBounds(true);
         // this.king.body.setCircle(25);
@@ -97,7 +136,8 @@ class Level extends Phaser.Scene{
         //this.text = this.add.text(500, 250, 'PRESIONA\t[→] [D]', {
         //     fontFamily: 'Consolas', fontSize: '30px'
         // }).setDepth(10);
-        
+
+        //Animaciones del personaje king
         this.anims.create({
             // Nombre de la animación
             key: 'king_idle',
@@ -112,9 +152,7 @@ class Level extends Phaser.Scene{
             frameRate: 6
         });
 
-
         //this.king.anims.play('king_idle');
-
 
         this.anims.create({
             // Nombre de la animación
@@ -171,7 +209,23 @@ class Level extends Phaser.Scene{
             repeat: 0,
             frameRate: 2
         });
-
+        this.cameras.main.setSize(1920,1080);
+        this.cameras.main.startFollow(this.king);
+        // this.anims.create({
+        //     // Nombre de la animación
+        //     key: 'antorchab_iddle',
+        //     // Se cargan los frames por números
+        //     // NOTA: generateFrameNames() se
+        //     // usa cuando ya existe un Atlas
+        //     frames: this.anims.generateFrameNumbers('antorchab', {
+        //         start: 0,
+        //         end: 5
+        //     }),
+        //     repeat: -1,
+        //     frameRate: 6
+        // });
+        
+        //Mapeo de teclas
         this.teclas = this.input.keyboard.addKeys({
             izq: keyCodes.A,
             der: keyCodes.D,
@@ -183,9 +237,8 @@ class Level extends Phaser.Scene{
         this.teclas.izq.on('down', ()=>{
                 this.king.flipX = true;
                 ////this.king.anims.play('king_run');
-                this.king.body.setAcceleration(-800);
+                this.king.body.setAcceleration(0);
         });
-
         this.teclas.izq.on('up', ()=>{
             //this.king.anims.stop();
             //this.king.anims.play('king_idle');
@@ -196,10 +249,9 @@ class Level extends Phaser.Scene{
         this.teclas.der.on('down', ()=>{
             this.king.flipX = false;
             //this.king.anims.play('king_run');
-            this.king.body.setAcceleration(800);
+            this.king.body.setAcceleration(0);
             this.king.body.setVelocity(0);
         });
-
         this.teclas.der.on('up', ()=>{
             //this.king.anims.stop();
             //this.king.anims.play('king_idle');
@@ -210,7 +262,6 @@ class Level extends Phaser.Scene{
         this.teclas.powQ.on('down', ()=>{
             this.king.play('king_attack');
         });
-
         this.teclas.powQ.on('up', ()=>{
             //this.king.anims.stop();
             //this.king.play('king_idle');
@@ -234,7 +285,7 @@ class Level extends Phaser.Scene{
             this.king.body.setVelocityY(800);
         });
 
-     
+        //Grupo de corazones
         this.grupo = this.physics.add.group({
             key: 'hearts',
             repeat: 5,
@@ -254,21 +305,22 @@ class Level extends Phaser.Scene{
         this.grupo.getChildren()[4].visible = false;
         this.grupo.getChildren()[5].visible = false;
 
-        this.grupoC = this.physics.add.group({
-            key: 'hearts',
-            repeat: 2,
-            setXY: {
-                x: 1000,
-                y: 700,
-                stepX: 750
-            }
-        });
-        this.grupoC.children.iterate((corazon) => {
-            corazon.setScale(1);
-            corazon.body.setAllowGravity(false);
-        });
-        this.grupoC.playAnimation('hearts');
+        // this.grupoC = this.physics.add.group({
+        //     key: 'hearts',
+        //     repeat: 2,
+        //     setXY: {
+        //         x: 1000,
+        //         y: 700,
+        //         stepX: 750
+        //     }
+        // });
+        // this.grupoC.children.iterate((corazon) => {
+        //     corazon.setScale(1);
+        //     corazon.body.setAllowGravity(false);
+        // });
+        // this.grupoC.playAnimation('hearts');
 
+        //Grupo de pociones
         this.grupo2 = this.physics.add.group({
             key: 'potions',
             repeat: 3,
@@ -278,72 +330,74 @@ class Level extends Phaser.Scene{
             stepX: 100,
             }
             });
-            this.grupo2.children.iterate( (posion) => {
-                posion.setScale(0.8);
-                posion.body.setAllowGravity(false);
-            } );
-            this.grupo2.playAnimation('potions');
-
-        this.grupoO = this.physics.add.group({
-            key: 'lineBlock',
-            repeat: 3,
-            setXY: {
-                x: 1000,
-                y: 300,
-                stepX: 900
-            }
-        });
-        this.grupoO.children.iterate( (block) => {
-            block.body.setAllowGravity(false);
-            this.physics.add.existing(block, true); //FORMA2 true
-            block.setImmovable();
+        this.grupo2.children.iterate( (posion) => {
+            posion.setScale(0.8);
+            posion.body.setAllowGravity(false);
         } );
-        this.physics.add.collider(this.king, this.grupoO, () => {
-            // this.king.setVelocity(0);
-            // this.king.setAcceleration(0);
-            console.log("colision rey con bloque largo");
-        });
+        this.grupo2.playAnimation('potions');
 
-        this.grupoO2 = this.physics.add.group({
-            key: 'lineBlock',
-            repeat: 4,
-            setXY: {
-                x: 1193,
-                y: 300,
-                stepX: 900
-            }
-        });
-        this.grupoO2.children.iterate( (block) => {
-            block.body.setAllowGravity(false);
-            this.physics.add.existing(block, true); //FORMA2 true
-            block.setImmovable();
-        } );
-        this.physics.add.collider(this.king, this.grupoO2, () => {
-            // this.king.setVelocity(0);
-            // this.king.setAcceleration(0);
-            console.log("colision rey con bloque largo");
-        });
-
-        this.grupoO3 = this.physics.add.group({
-            key: 'BlockBlock',
-            repeat: 2,
-            setXY: {
-                x: 800,
-                y: 466,
-                stepX: 900
-            }
-        });
-        this.grupoO3.children.iterate( (block) => {
-            block.body.setAllowGravity(false);
-            this.physics.add.existing(block, true); //FORMA2 true
-            block.setImmovable();
-        } );
-        this.physics.add.collider(this.king, this.grupoO3, () => {
-            // this.king.setVelocity(0);
-            // this.king.setAcceleration(0);
-            console.log("colision rey con bloque");
-        });
-
+        //Grupo linea de bloques
+        // this.grupoO = this.physics.add.group({
+        //     key: 'lineBlock',
+        //     repeat: 3,
+        //     setXY: {
+        //         x: 1000,
+        //         y: 300,
+        //         stepX: 900
+        //     }
+        // });
+        // this.grupoO.children.iterate( (block) => {
+        //     block.body.setAllowGravity(false);
+        //     this.physics.add.existing(block, true); //FORMA2 true
+        //     block.setImmovable();
+        // } );
+        // this.physics.add.collider(this.king, this.grupoO, () => {
+        //     // this.king.setVelocity(0);
+        //     // this.king.setAcceleration(0);
+        //     console.log("colision rey con bloque largo");
+        // });
+        // //2d0 grupo de linea de bloques
+        // this.grupoO2 = this.physics.add.group({
+        //     key: 'lineBlock',
+        //     repeat: 4,
+        //     setXY: {
+        //         x: 1193,
+        //         y: 300,
+        //         stepX: 900
+        //     }
+        // });
+        // this.grupoO2.children.iterate( (block) => {
+        //     block.body.setAllowGravity(false);
+        //     this.physics.add.existing(block, true); //FORMA2 true
+        //     block.setImmovable();
+        // } );
+        // this.physics.add.collider(this.king, this.grupoO2, () => {
+        //     // this.king.setVelocity(0);
+        //     // this.king.setAcceleration(0);
+        //     console.log("colision rey con bloque largo");
+        // });
+        // //3er grupo de linea de bloques
+        // this.grupoO3 = this.physics.add.group({
+        //     key: 'BlockBlock',
+        //     repeat: 2,
+        //     setXY: {
+        //         x: 800,
+        //         y: 466,
+        //         stepX: 900
+        //     }
+        // });
+        // this.grupoO3.children.iterate( (block) => {
+        //     block.body.setAllowGravity(false);
+        //     this.physics.add.existing(block, true); //FORMA2 true
+        //     block.setImmovable();
+        // } );
+        // this.physics.add.collider(this.king, this.grupoO3, () => {
+        //     // this.king.setVelocity(0);
+        //     // this.king.setAcceleration(0);
+        //     console.log("colision rey con bloque");
+        // });
+   
+        //Grupo de pinchos
         this.grupoO4 = this.physics.add.group({
             key: 'pinchos',
             repeat: 5,
@@ -351,8 +405,7 @@ class Level extends Phaser.Scene{
                 x: 1200,
                 y: 750,
                 stepX: 900
-            }
-             
+            }  
         });
         
         this.grupoO4.children.iterate( (pincho) => {
@@ -367,67 +420,108 @@ class Level extends Phaser.Scene{
             // this.king.setVelocity(0);
             // this.king.setAcceleration(0);
             console.log("colision rey con pinchos");
+            this.cameras.main
+            .setBackgroundColor(0x000000)
+            //.fadeOut(500);
+            // tiempo en milisegundos, intensidad en [0,1]
+            .shake(500, 0.03);
+            //this.cameras.main.fadeIn(500);
         });
         this.grupoO4.playAnimation('pinchos');
 
+        for (let index = 0; index < 10; index++) {
+            this.antorchas[index].anims.play('antorchab'); 
+        }
+       
         
+        
+        //animacion de cofre
+        // this.cofre.anims.play('cofreanimado');
     }
     update(time, delta) {
+        var x = 0;
+        var y = 0;
         if (this.teclas.der.isDown)
         {
-            this.king.x += 2;
-            if (this.king.x >= 1820) {
-                this.king.x = 1820;
+            if(!this.teclas.izq.isDown){
+                this.king.x += 3;
+                this.grupo.children.iterate( (corazon) => {
+                    corazon.x = (-800 + this.king.x ) + (y*100);
+                    y++;
+                } );
+                this.grupo2.children.iterate( (pocion) => {
+                    pocion.x = (800 + this.king.x) - (x*100);
+                    x++;
+                } );
             }
+            // this.grupo2[0].x += 2;
+            // this.grupo2[1].x += 2;
+            // this.grupo2[2].x += 2;
+            // this.grupo2[3].x += 2;
+            // this.grupo2[4].x += 2;
+            // this.grupo2[5].x += 2;
+            // if (this.king.x >= 1820) {
+            //     this.king.x = 1820;
+            // }
 
             if (this.bgs[1].x >= - this.bgs[1].displayWidth + 1920) {
-                this.bgs[0].x -= 2;
-                this.bgs[1].x -= 2;
+                // this.bgs[0].x -= 2;
+                // this.bgs[1].x -= 2;
 
-                this.grupoC.children.iterate((corazon) => {
-                    corazon.x -= 2;
-                });
-                this.grupoO.children.iterate((corazon) => {
-                    corazon.x -= 2;
-                });
-                this.grupoO2.children.iterate((corazon) => {
-                    corazon.x -= 2;
-                });
-                this.grupoO3.children.iterate((corazon) => {
-                    corazon.x -= 2;
-                });
-                this.grupoO4.children.iterate((corazon) => {
-                    corazon.x -= 2;
-                });
+                // this.grupoC.children.iterate((corazon) => {
+                //     corazon.x -= 2;
+                // });
+                // this.grupoO.children.iterate((corazon) => {
+                //     corazon.x -= 2;
+                // });
+                // this.grupoO2.children.iterate((corazon) => {
+                //     corazon.x -= 2;
+                // });
+                // this.grupoO3.children.iterate((corazon) => {
+                //     corazon.x -= 2;
+                // });
+                // this.grupoO4.children.iterate((corazon) => {
+                //     corazon.x -= 2;
+                // });
             }
         }
 
         if (this.teclas.izq.isDown)
         {
-            this.king.x -= 2;
-            if (this.king.x <= 100) {
-                this.king.x = 100;
+            if(!this.teclas.der.isDown){
+                this.king.x -= 3;
+                this.grupo.children.iterate( (corazon) => {
+                    corazon.x = (-800 + this.king.x) + (y*100);
+                    y++;
+                } );
+                this.grupo2.children.iterate( (pocion) => {
+                    pocion.x = (800 + this.king.x) - (x*100);
+                    x++;
+                } );
             }
+            // if (this.king.x <= 100) {
+            //     this.king.x = 100;
+            // }
 
             if (this.bgs[0].x <= 0) {
-                this.bgs[0].x += 2;
-                this.bgs[1].x += 2;
+                // this.bgs[0].x += 2;
+                // this.bgs[1].x += 2;
 
-                this.grupoC.children.iterate((corazon) => {
-                    corazon.x += 2;
-                });
-                this.grupoO.children.iterate((corazon) => {
-                    corazon.x += 2;
-                });
-                this.grupoO2.children.iterate((corazon) => {
-                    corazon.x += 2;
-                });
-                this.grupoO3.children.iterate((corazon) => {
-                    corazon.x += 2;
-                });
-                this.grupoO4.children.iterate((corazon) => {
-                    corazon.x += 2;
-                });
+                // this.grupoC.children.iterate((corazon) => {
+                //     corazon.x += 2;
+                // });
+                // this.grupoO.children.iterate((corazon) => {
+                //     corazon.x += 2;
+                // });
+                // this.grupoO2.children.iterate((corazon) => {
+                //     corazon.x += 2;
+                // });
+                // this.grupoO3.children.iterate((corazon) => {
+                //     corazon.x += 2;
+                // });
+                // this.grupoO4.children.iterate((corazon) => {
+                //     corazon.x += 2;
+                // });
             }
         }
 
@@ -444,7 +538,16 @@ class Level extends Phaser.Scene{
         if (this.teclas.kspc.isDown) {
             
         }
-
+        if(this.teclas.kspc.isDown && this.king.x >= 300 && this.king.x <= 300 + 50)
+        {
+            this.puertas[0].anims.play('puerta');
+            this.cameras.main
+            .fadeOut(1000);
+            setTimeout(() => {
+                this.scene.start('Room1',500);
+            }, 1300);
+            
+        }
         // if(this.king.x >= 450 && //this.grupo.getChildren()[0].x
         // this.king.x <= 450 + 50) //this.grupo.getChildren()[0].x
         // {
@@ -458,23 +561,23 @@ class Level extends Phaser.Scene{
         
         if(this.king.x >= 750 && this.king.x <= 750 + 50)
         {
-                this.grupoC.getChildren()[0].visible = false;
+            //     this.grupoC.getChildren()[0].visible = false;
 
-            this.grupo.getChildren()[3].visible = true;
+            // this.grupo.getChildren()[3].visible = true;
         }
         if(this.king.x >= 1350 && this.king.x <= 1350 + 50) 
         {
 
-                this.grupoC.getChildren()[1].visible = false;
+            //     this.grupoC.getChildren()[1].visible = false;
 
-            this.grupo.getChildren()[4].visible = true;
+            // this.grupo.getChildren()[4].visible = true;
         }
         if(this.king.x >= 1800 && this.king.x <= 1800 + 50)
         {
 
-                this.grupoC.getChildren()[2].visible = false;
+            //     this.grupoC.getChildren()[2].visible = false;
 
-            this.grupo.getChildren()[5].visible = true;
+            // this.grupo.getChildren()[5].visible = true;
         }
     }
 }

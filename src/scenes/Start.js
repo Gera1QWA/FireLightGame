@@ -16,36 +16,44 @@ class Start extends Phaser.Scene {
     }
     preload() {
         this.load.path = './assets/';
-        this.load.image(['Puntero','FondoStartA','Title', 'Start','text','BookB','BookR','Pergamino','Eggs','Story'
-        ]);
+        this.load.image(['Puntero']);
+
+        this.load.image('FondoStartA', 'scenastart/fondostartA.png');
+        this.load.image('Title', 'scenastart/Title.png');
+        this.load.image('text', 'scenastart/text.png');
+        this.load.image('Start', 'scenastart/start.png');
+        this.load.image('BookB', 'scenastart/bookB.png');
+        this.load.image('BookR', 'scenastart/bookR.png');
+        this.load.image('Pergamino', 'scenastart/pergamino.png');
+        this.load.image('Eggs', 'scenastart/eggs.png');
+        this.load.image('Story', 'scenastart/story.png');
+
 
         this.load.image([
-            {key: '0', url:'01.png'},
-            {key: '1', url:'02.png'},
-            {key: '2', url:'03.png'},
-            {key: '3', url:'04.png'},
-            {key: '4', url:'05.png'},
-            {key: '5', url:'06.png'},
-            {key: '6', url:'07.png'},
-            {key: '7', url:'08.png'},
-            {key: '8', url:'09.png'},
+            {key: '0', url:'eggs/01.png'},
+            {key: '1', url:'eggs/02.png'},
+            {key: '2', url:'eggs/03.png'},
+            {key: '3', url:'eggs/04.png'},
+            {key: '4', url:'eggs/05.png'},
+            {key: '5', url:'eggs/06.png'},
+            {key: '6', url:'eggs/07.png'},
+            {key: '7', url:'eggs/08.png'},
+            {key: '8', url:'eggs/09.png'},
     ]);
         this.load.audio({
             key: "musica",
-            url: "cancion.mp3"
+            url: "canciones/cancion.mp3"
         });
 
-        this.load.spritesheet('star','star.png',    
+        this.load.spritesheet('star','scenastart/star.png',    
         {
             frameWidth: 64,
             frameHeight: 64,
-            //margin: 1
         })
-        this.load.spritesheet('ajustes','ajustes.png',    
+        this.load.spritesheet('ajustes','scenastart/ajustes.png',    
         {
             frameWidth: 100,
             frameHeight: 100,
-            //margin: 1
             padding: 1,
         })
 
@@ -173,8 +181,7 @@ class Start extends Phaser.Scene {
 
         
         this.bookr.on('pointerdown',()=>{
-            // cargar la esena de boot
-            //this.scene.start('BookR');
+
             this.story = this.add.image(
                 this.width / 2,
                 this.height / 2,
@@ -182,9 +189,6 @@ class Start extends Phaser.Scene {
             ).setDepth(6).setScale(2).setInteractive();
 
             this.story.on('pointerdown',()=>{
-                // cargar la esena de boot
-                //this.scene.start('BookR');
-              
                 this.story.visible=false;
             });
         });

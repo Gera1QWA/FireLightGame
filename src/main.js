@@ -1,7 +1,8 @@
-import Room1 from "../scenes/Room1.js"
-import Level from "../scenes/Level.js"
-import Start from "../scenes/Start.js"
-import Map from "../scenes/Map.js";
+import Start from "./scenes/Start.js"
+import Map from "./scenes/Map.js"
+import Level from "./scenes/Level.js"
+import Room1 from "./scenes/Room1.js";
+
 
 
 const config = {
@@ -26,9 +27,9 @@ const config = {
     backgroundColor: "#000000", 	//Color de fondo del canvas ()
     scene: [
         Start,
-        Level,
-        Room1, 
-        Map],    //Aquí irá la lista de scenas del juego
+        Level, 
+        Map,
+        Room1],    //Aquí irá la lista de scenas del juego
     banner:{
         hidePhaser: true,
         text: "#fff00f",

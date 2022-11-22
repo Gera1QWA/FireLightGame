@@ -16,15 +16,20 @@ class Map extends Phaser.Scene {
     }
     preload() {
         this.load.path = './assets/';
-        this.load.image(['Puntero','Mapa','Title', 'World','Locked'
-        ]);
+        this.load.image(['Puntero']);
+
+        this.load.image('MapaA', 'scenamap/MapaA.png');
+        this.load.image('Title', 'scenastart/Title.png');
+        this.load.image('World', 'scenamap/World.png');
+        this.load.image('Locked', 'scenamap/Locked.png');
     }
     create() {
 
+        this.scene.stop('Start');
         //Puntero
         this.puntero = this.add.image(0, 0, 'Puntero').setOrigin(0.15, 0.15).setDepth(12).setScale(1.5);
         //Background con movimiento
-        this.fondo = this.add.image(0, 0, "Mapa").setOrigin(0, 0).setDepth(-1).setScale(1.5),
+        this.fondo = this.add.image(0, 0, "MapaA").setOrigin(0, 0).setDepth(-1).setScale(1.5),
 
         //Imagen de Titulo
         this.title = this.add.image(

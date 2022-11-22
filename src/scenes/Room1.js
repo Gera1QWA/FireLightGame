@@ -26,9 +26,8 @@ class Room1 extends Phaser.Scene {
 
         this.load.image('blueroom', 'scenaroom/blueroom.png');
 
-        this.load.atlas('maku','Maku/MakuIddle/original/makuiddle.png','Maku/MakuIddle/original/makuiddle_atlas.json');
-        this.load.animation('makuAnim','Maku/MakuIddle/makuiddle_anim/makuiddle_anim.json');
-        
+        this.load.atlas('makuiddle','Maku/MakuIddle/original/makuiddle.png','Maku/MakuIddle/original/makuiddle_atlas.json');
+        this.load.animation('makuAnim','Maku/makuiddle_anim/makuiddle_anim.json');
 
     }
 
@@ -44,10 +43,10 @@ class Room1 extends Phaser.Scene {
         
 
         this.fondo = this.add.image(0, 0, "blueroom").setOrigin(0, 0).setDepth(-1);
+        this.maku = this.add.sprite(1300, 550, "Puntero", 0).setDepth(0).setScale(5);
+        this.maku.flipX = true;
+        this.maku.anims.play("makuiddle");
 
-        this.maku = this.add.sprite("maku").setDepth(0);
-
-        this.maku.anims.play("maku");
         // const keyCodes = Phaser.Input.Keyboard.KeyCodes;
         // // const eventos = Phaser.Input.Events;
 

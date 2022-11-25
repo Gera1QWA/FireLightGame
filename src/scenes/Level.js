@@ -97,14 +97,14 @@ class Level extends Phaser.Scene{
             this.antorchas[index].setScale(4);
         }
         //Creacion cuadro
-        this.cuadro = this.add.image(800, 400, 'cuadro').setScale(0.15).setDepth(0);
+        this.cuadro = this.add.image(1200, 400, 'cuadro').setScale(0.15).setDepth(0);
         //Creacion Puertas
         this.puertas = [];
         for(let index = 0; index < 10; index++) {
             // this.puertas[index] = this.add.image(index*1000, 770, "puertaCerrada").setOrigin(1, 1).setDepth(0);
             //this.puertas[index].setScale(0.6);
             // if(index%2==0){
-                this.puertas[index] = this.add.sprite((index*1100)+300, 530, "puertaclosed").setDepth(0);
+                this.puertas[index] = this.add.sprite((index*1100)+600, 530, "puertaclosed").setDepth(0);
                 this.puertas[index].setScale(2.4);
             // }
         }
@@ -122,7 +122,7 @@ class Level extends Phaser.Scene{
         //this.king = this.add.sprite(300, 520, 'king', 0).setScale(5);
         this.king = this.physics.add.image(1000, 520, 'king').setScale(5);
         //this.physics.add.existing(this.king, true); //FORMA2 true
-        this.king.body.setCollideWorldBounds(true);
+        this.king.body.setCollideWorldBounds(false);
         // this.king.body.setCircle(25);
         // this.king.body.setSquare(25);
         this.king.body.setSize(35, 53, true);
@@ -467,6 +467,30 @@ class Level extends Phaser.Scene{
     update(time, delta) {
         var x = 0;
         var y = 0;
+ //////////////
+        // if (this.bgs[1].x >= - this.bgs[1].displayWidth + 1920) {
+        //     this.bgs[0].x -= 2;
+        //     this.bgs[1].x -= 2;
+        // }
+
+        if (this.teclas.izq.isDown)
+        {
+            if (this.king.x <= 100) {
+                this.king.x = 100;
+            }
+
+            if (this.bgs[0].x <= 0) {
+                this.bgs[0].x += 2;
+                this.bgs[1].x += 2;
+                for(let index = 0; index < 10; index++) {
+                    this.puertas[index].x += 2;
+                }
+                for(let index = 0; index < 10; index++) {
+                    this.antorchas[index].x += 2;
+                }
+            }
+        }
+///////////////////////77
         if (this.teclas.der.isDown)
         {
             if(!this.teclas.izq.isDown){
@@ -479,6 +503,17 @@ class Level extends Phaser.Scene{
                     pocion.x = (800 + this.king.x) - (x*100);
                     x++;
                 } );
+                if (this.bgs[0].x <= 0) {
+                    this.bgs[0].x -= 2;
+                    this.bgs[1].x -= 2;
+                    for(let index = 0; index < 10; index++) {
+                        this.puertas[index].x -= 2;
+                    }
+                    for(let index = 0; index < 10; index++) {
+                        this.antorchas[index].x -= 2;
+                    }
+
+                }
             }
             // this.grupo2[0].x += 2;
             // this.grupo2[1].x += 2;
@@ -489,6 +524,9 @@ class Level extends Phaser.Scene{
             // if (this.king.x >= 1820) {
             //     this.king.x = 1820;
             // }
+/////////////////////
+            
+///////////////////
 
             if (this.bgs[1].x >= - this.bgs[1].displayWidth + 1920) {
                 // this.bgs[0].x -= 2;
@@ -564,7 +602,7 @@ class Level extends Phaser.Scene{
         if (this.teclas.kspc.isDown) {
             
         }
-        if(this.teclas.kspc.isDown && this.king.x >= 300 && this.king.x <= 300 + 50)
+        if(this.teclas.kspc.isDown && this.king.x >= 300+300 && this.king.x <= 300 + 50+300)
         {
             // setInterval(() => {
             //     console.log("esta haciendo algo");
@@ -574,12 +612,9 @@ class Level extends Phaser.Scene{
             
             this.puertas[0].anims.play('puerta');
             // setTimeout(() => {
-<<<<<<< Updated upstream
-                    escena("Room4",this.scene);
-=======
-                    escena("Room1",this.scene);
->>>>>>> Stashed changes
 
+                escena("Room4",this.scene);
+                    
             // }, 1500);
                 // this.scene.start("Room1", {
                 // });

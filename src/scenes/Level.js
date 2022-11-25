@@ -574,7 +574,11 @@ class Level extends Phaser.Scene{
             
             this.puertas[0].anims.play('puerta');
             // setTimeout(() => {
+<<<<<<< Updated upstream
                     escena("Room4",this.scene);
+=======
+                    escena("Room1",this.scene);
+>>>>>>> Stashed changes
 
             // }, 1500);
                 // this.scene.start("Room1", {

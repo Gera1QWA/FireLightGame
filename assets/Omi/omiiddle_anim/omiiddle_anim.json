@@ -1,0 +1,28 @@
+{
+    "anims": [
+        {
+            "key": "omiiddle",
+            "type": "frames",
+            "repeat": -1,
+            "frameRate": 10,
+            "frames": [
+                {
+                    "key": "omiiddle",
+                    "frame": "fila-1-columna-2_(2)"
+                },
+                {
+                    "key": "omiiddle",
+                    "frame": "fila-1-columna-3_(2)"
+                },
+                {
+                    "key": "omiiddle",
+                    "frame": "fila-1-columna-4_(2)"
+                },
+                {
+                    "key": "omiiddle",
+                    "frame": "fila-1-columna-5_(2)"
+                }
+            ]
+        }
+    ]
+}

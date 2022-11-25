@@ -26,6 +26,11 @@ class Room3 extends Phaser.Scene {
 
         this.load.image('violetroom', 'scenaroom/violetroom.png');
 
+        this.load.spritesheet('violet','PSecundarios/violeta.png',
+        {
+            frameWidth: 123,
+            frameHeight: 172
+        })
     }
 
     create(){
@@ -37,12 +42,24 @@ class Room3 extends Phaser.Scene {
         
 
         this.fondo = this.add.image(0, 0, "violetroom").setOrigin(0, 0).setDepth(-1);
+        
+        this.violet = this.add.sprite(1750, 620, 'violet', 0).setScale(1.8);
+        this.violet.flipX = true;
+        this.anims.create({
+            // Nombre de la animación
+            key: 'violet-idle',
+            // Se cargan los frames por números
+            // NOTA: generateFrameNames() se
+            // usa cuando ya existe un Atlas
+            frames: this.anims.generateFrameNumbers('violet', {
+                start: 0,
+                end: 5
+            }),
+            repeat: -1,
+            frameRate: 6
+        });
 
-
-        // const keyCodes = Phaser.Input.Keyboard.KeyCodes;
-        // // const eventos = Phaser.Input.Events;
-
-
+        this.violet.anims.play('violet-idle');
 
     }
     update(time, delta) {

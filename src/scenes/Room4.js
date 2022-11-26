@@ -26,22 +26,35 @@ class Room4 extends Phaser.Scene {
 
         this.load.image('redroom', 'scenaroom/redroom.png');
 
+        this.load.spritesheet('desconocido','PSecundarios/desconocidolev1.png',
+        {
+            frameWidth: 64,
+            frameHeight: 64
+        })
+
     }
 
     create(){
-        // this.scene.stop('Level');
-        // // this.cameras.main.setBackgroundColor(0x0000ff)
-        // // // tiempo en milisegundos
-        // // .fadeIn(2000);
-
-        
 
         this.fondo = this.add.image(0, 0, "redroom").setOrigin(0, 0).setDepth(-1);
 
+        this.desconocido = this.add.sprite(1600, 570, 'desconocido', 0).setScale(7).setDepth(3);
+        //this.violet.flipX = true;
+        this.anims.create({
+            // Nombre de la animación
+            key: 'desconocido-idle',
+            // Se cargan los frames por números
+            // NOTA: generateFrameNames() se
+            // usa cuando ya existe un Atlas
+            frames: this.anims.generateFrameNumbers('desconocido', {
+                start: 0,
+                end: 3
+            }),
+            repeat: -1,
+            frameRate: 3
+        });
 
-        // const keyCodes = Phaser.Input.Keyboard.KeyCodes;
-        // // const eventos = Phaser.Input.Events;
-
+        this.desconocido.anims.play('desconocido-idle');
 
 
     }

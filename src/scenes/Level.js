@@ -31,8 +31,8 @@ class Level extends Phaser.Scene{
         this.load.spritesheet('nami','Nami/idlegOOD.png',
         {
             frameWidth: 180,
-            frameHeight: 180
-        })
+            frameHeight: 180,
+        });
 
         // this.load.spritesheet('nami_r','',
         // {
@@ -63,6 +63,153 @@ class Level extends Phaser.Scene{
         //     frameWidth: 160,
         //     frameHeight: 111
         // });
+          
+        //ENEMIGOS
+        
+        this.load.atlas('slime', '/enemigos/limo/slime.png','/enemigos/limo/slime_atlas.json');
+        this.load.animation('limo', '/enemigos/limo/slime_anim.json');
+        
+        //king
+        /*
+        this.load.spritesheet('king_dead','/enemigos/king2/king_dead.png',
+        {
+            frameWidth: 125,
+            frameHeight: 98,
+            margin: 1,
+        });
+        this.load.spritesheet('king_at','/enemigos/king2/king_at.png',
+        {
+            frameWidth: 100,
+            frameHeight: 100,
+            margin: 4,
+            spacing: 1,
+        });
+*/
+        //amadura 
+        /*
+        this.load.spritesheet('armo','/enemigos/amaduraNe/armo_.png',
+        {
+            frameWidth: 512,
+            frameHeight: 512,
+            margin: 1
+        });
+        this.load.spritesheet('armo_atk','/enemigos/amaduraNe/armo_atk.png',
+        {
+            frameWidth: 68,
+            frameHeight: 68,
+            margin: 3,
+            spacing: 3,
+        });
+        this.load.spritesheet('armo_walk','/enemigos/amaduraNe/armo_walk.png',
+        {
+            frameWidth: 68,
+            frameHeight:62,
+            margin: 1,
+            spacing: 2
+        });
+        */
+        //esqueleto
+        
+        this.load.spritesheet('esq_idle','/enemigos/esqueleto/esq_idle.png',
+        {
+            frameWidth: 143,
+            frameHeight: 109,
+            margin: 1,
+            spacing:1,
+        });
+        this.load.spritesheet('esq_atk','/enemigos/esqueleto/esq_atk.png',
+        {
+            frameWidth: 143,
+            frameHeight: 109,
+            margin: 1,
+            spacing:2,
+        });
+        this.load.spritesheet('esq_dead','/enemigos/esqueleto/esq_dead.png',
+        {
+            frameWidth: 143,
+            frameHeight: 109,
+            margin: 1,
+            spacing:2,
+        });
+        this.load.spritesheet('esq_walk','/enemigos/esqueleto/esq_walk.png',
+        {
+            frameWidth: 162,
+            frameHeight: 103,
+            margin: 2,
+            spacing:3,
+        });
+
+        //esqf
+        /*
+        this.load.spritesheet('esqF_atk','/enemigos/esqueletofuerte/esqF_atk.png',
+        {
+            frameWidth: 105,
+            frameHeight: 97,
+            margin: 2
+        });
+        this.load.spritesheet('esqF_dead','/enemigos/esqueletofuerte/esqF_dead.png',
+        {
+            frameWidth: 99,
+            frameHeight: 97,
+            margin: 2
+        });
+        this.load.spritesheet('esqF_idle','/enemigos/esqueletofuerte/esqF_idle.png',
+        {
+            frameWidth: 99,
+            frameHeight: 97,
+            margin: 2
+        });*/
+        //goblin
+        /*
+        this.load.spritesheet('go_walk','/enemigos/goblin/go_walk.png',
+        {
+            frameWidth: 143,
+            frameHeight: 109,
+            margin: 2
+        });
+        this.load.spritesheet('go_idle','/enemigos/goblin/go_idle.png',
+        {
+            frameWidth: 143,
+            frameHeight: 109,
+            margin: 2
+        }); 
+        this.load.spritesheet('go_atk','/enemigos/goblin/go_atk.png',
+        {
+            frameWidth: 143,
+            frameHeight: 109,
+            margin: 2
+        });  
+        this.load.spritesheet('go_dead','/enemigos/goblin/go_dead.png',
+        {
+            frameWidth: 140,
+            frameHeight: 140,
+            margin: 2
+        });  
+        */
+        // golem
+        /*
+        this.load.spritesheet('golem_atk','/enemigos/golem/golem_atk.png',
+        {
+            frameWidth: 99,
+            frameHeight: 85,
+            margin: 2,
+            spacing: 3,
+        });      
+        this.load.spritesheet('golem_dead','/enemigos/golem/golem_dead.png',
+        {
+            frameWidth: 99,
+            frameHeight: 85,
+            margin: 2,
+            spacing: 3,
+        });     
+        this.load.spritesheet('golem_idle','/enemigos/golem/golem_idle.png',
+        {
+            frameWidth: 99,
+            frameHeight: 85,
+            margin: 2,
+            spacing: 3,
+        }); 
+        */
 
         this.load.atlas('hearts','hearts/hearts.png','hearts/hearts_atlas.json');
         this.load.animation('heartsAnim','hearts/hearts_anim.json');
@@ -118,17 +265,17 @@ class Level extends Phaser.Scene{
         this.suelo.body.setAllowGravity(false);
         this.suelo.setImmovable();
         this.suelo.body.setSize(100000, 55, true);
-        //visible false
+        //visible false 
         this.suelo.setVisible(false);
         //FISICAS nami
         //this.nami = this.add.sprite(300, 520, 'nami', 0).setScale(5);
-        this.nami = this.physics.add.sprite(1000, 520, 'nami').setScale(5);//AQUI SE AGREGA EL SPRITE
+        this.nami = this.physics.add.sprite(1000, 120, 'nami').setOrigin(0.5,0.39).setScale(5);//AQUI SE AGREGA EL SPRITE
         //this.physics.add.existing(this.nami, true); //FORMA2 true
         this.nami.body.setCollideWorldBounds(false);
         // this.nami.body.setCircle(25);
         // this.nami.body.setSquare(25);
-        this.nami.body.setSize(35, 53, true);
-        this.nami.body.setOffset(62, 52);
+        this.nami.body.setSize(48, 45, true);
+        this.nami.body.setOffset(72, 70);
         this.physics.add.collider(this.nami, this.suelo, () => {
             //this.yoshi.setVelocity(0);
             //this.yoshi.setAcceleration(0);
@@ -479,6 +626,8 @@ class Level extends Phaser.Scene{
 
         if (this.teclas.izq.isDown)
         {
+            this.nami.body.setOffset(60, 70);
+
             if (this.nami.x <= 100) {
                 this.nami.x = 100;
             }
@@ -497,6 +646,7 @@ class Level extends Phaser.Scene{
 ///////////////////////77
         if (this.teclas.der.isDown)
         {
+            this.nami.body.setOffset(72, 70);
             if(!this.teclas.izq.isDown){
                 this.nami.x += 3;
                 this.grupo.children.iterate( (corazon) => {

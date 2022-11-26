@@ -34,11 +34,11 @@ class Level extends Phaser.Scene{
             frameHeight: 180,
         });
 
-        // this.load.spritesheet('nami_r','',
-        // {
-        //     frameWidth: 160,
-        //     frameHeight: 111,
-        // })
+        this.load.spritesheet('nami_run','Nami/RungOOD.png',
+        {
+            frameWidth: 180,
+            frameHeight: 180,
+        })
 
         // this.load.spritesheet('nami_j','Nami/jumpgOOD.png',
         // {
@@ -57,13 +57,6 @@ class Level extends Phaser.Scene{
         //     frameWidth: 160,
         //     frameHeight: 111
         // })
-        
-        // this.load.spritesheet('antorchab','antorchab/antorchab/antorchab.png',
-        // {
-        //     frameWidth: 160,
-        //     frameHeight: 111
-        // });
-          
         //ENEMIGOS
         
         this.load.atlas('slime', '/enemigos/limo/slime.png','/enemigos/limo/slime_atlas.json');
@@ -304,21 +297,19 @@ class Level extends Phaser.Scene{
 
         this.nami.anims.play('nami_idle');
 
-        //this.nami.anims.play('nami_idle');
-
-        // this.anims.create({
-        //     // Nombre de la animación
-        //     key: 'nami_run',
-        //     // Se cargan los frames por números
-        //     // NOTA: generateFrameNames() se
-        //     // usa cuando ya existe un Atlas
-        //     frames: this.anims.generateFrameNumbers('nami_r', {
-        //         start: 0,
-        //         end: 7
-        //     }),
-        //     repeat: -1,
-        //     frameRate: 6
-        // });
+        this.anims.create({
+            // Nombre de la animación
+            key: 'nami_run',
+            // Se cargan los frames por números
+            // NOTA: generateFrameNames() se
+            // usa cuando ya existe un Atlas
+            frames: this.anims.generateFrameNumbers('nami_run', {
+                start: 0,
+                end: 7
+            }),
+            repeat: -1,
+            frameRate: 6
+        });
 
         // this.anims.create({
         //     // Nombre de la animación
@@ -388,20 +379,21 @@ class Level extends Phaser.Scene{
         });
 
         this.teclas.izq.on('down', ()=>{
-                this.nami.flipX = true;
-                ////this.nami.anims.play('nami_run');
-                this.nami.body.setAcceleration(0);
+            this.nami.flipX = true;
+            this.nami.anims.play('nami_run');
+            this.nami.body.setAcceleration(0);
+            this.nami.body.setVelocity(0);
         });
         this.teclas.izq.on('up', ()=>{
             //this.nami.anims.stop();
-            // this.nami.anims.play('nami_idle');
+            this.nami.anims.play('nami_idle');
             this.nami.body.setAcceleration(0);
             this.nami.body.setVelocity(0);
         });
 
         this.teclas.der.on('down', ()=>{
             this.nami.flipX = false;
-            //this.nami.anims.play('nami_run');
+            this.nami.anims.play('nami_run');
             this.nami.body.setAcceleration(0);
             this.nami.body.setVelocity(0);
         });

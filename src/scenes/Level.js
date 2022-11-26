@@ -40,11 +40,11 @@ class Level extends Phaser.Scene{
             frameHeight: 180,
         })
 
-        // this.load.spritesheet('nami_j','Nami/jumpgOOD.png',
-        // {
-        //     frameWidth: 135,
-        //     frameHeight: 180,
-        // })
+        this.load.spritesheet('nami_jump','Nami/jumpgOOD.png',
+        {
+            frameWidth: 180,
+            frameHeight: 180,
+        })
 
         // this.load.spritesheet('nami_q','Medieval nami/Sprites/Attack1.png',
         // {
@@ -311,19 +311,19 @@ class Level extends Phaser.Scene{
             frameRate: 6
         });
 
-        // this.anims.create({
-        //     // Nombre de la animación
-        //     key: 'nami_jump',
-        //     // Se cargan los frames por números
-        //     // NOTA: generateFrameNames() se
-        //     // usa cuando ya existe un Atlas
-        //     frames: this.anims.generateFrameNumbers('nami_j', {
-        //         start: 0,
-        //         end: 2
-        //     }),
-        //     repeat: -1,
-        //     frameRate: 11
-        // });
+        this.anims.create({
+            // Nombre de la animación
+            key: 'nami_jump',
+            // Se cargan los frames por números
+            // NOTA: generateFrameNames() se
+            // usa cuando ya existe un Atlas
+            frames: this.anims.generateFrameNumbers('nami_jump', {
+                start: 0,
+                end: 2
+            }),
+            repeat: 1,
+            frameRate: 11
+        });
 
         // this.anims.create({
         //     // Nombre de la animación
@@ -421,13 +421,23 @@ class Level extends Phaser.Scene{
         });
 
         this.teclas.kspc.on('down', ()=>{
-            //this.nami.play('nami_jump');
+            this.nami.play('nami_jump');
             this.nami.body.setVelocityY(-800);
+            // this.nami.body.setSize(23, 50, true); //this.nami.body.setSize(48, 45, true);
+            // this.nami.body.setOffset(88,60); //this.nami.body.setOffset(72, 70);
         });
         this.teclas.kspc.on('up', ()=>{
             //this.nami.anims.stop();
-            //this.nami.play('nami_idle');
+            this.nami.play('nami_jump');
+            this.teclas.kspc.enabled = false;
+            setTimeout(() => {
+                this.nami.play('nami_idle');
+                this.teclas.kspc.enabled = true;
+                // this.nami.body.setSize(48, 45, true); //this.nami.body.setSize(48, 45, true);
+                // this.nami.body.setOffset(72,70); //this.nami.body.setOffset(72, 70);
+            }, 300);
             this.nami.body.setVelocityY(800);
+           
         });
 
         // this.teclas.powX.on('down', ()=>{

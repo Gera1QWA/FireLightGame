@@ -26,35 +26,35 @@ class Level extends Phaser.Scene{
         this.load.image('cuadrodragon', 'scenalevel/cuadrodragon.png');
         this.load.image('puertaclosed', 'scenalevel/puertaclosed.png');
 
-        this.load.spritesheet('king','Medieval King/Sprites/Idle.png',
+        this.load.spritesheet('nami','Nami/IdlegOOD.png',
         {
-            frameWidth: 160,
-            frameHeight: 111
+            frameWidth: 180,
+            frameHeight: 180
         })
 
-        this.load.spritesheet('king_r','Medieval King/Sprites/Run.png',
+        // this.load.spritesheet('nami_r','',
+        // {
+        //     frameWidth: 160,
+        //     frameHeight: 111,
+        // })
+
+        this.load.spritesheet('nami_j','Nami/JumpgOOD.png',
         {
-            frameWidth: 160,
-            frameHeight: 111,
+            frameWidth: 135,
+            frameHeight: 180,
         })
 
-        this.load.spritesheet('king_j','Medieval King/Sprites/Jump.png',
-        {
-            frameWidth: 160,
-            frameHeight: 111,
-        })
+        // this.load.spritesheet('nami_q','Medieval nami/Sprites/Attack1.png',
+        // {
+        //     frameWidth: 160,
+        //     frameHeight: 111
+        // })
 
-        this.load.spritesheet('king_q','Medieval King/Sprites/Attack1.png',
-        {
-            frameWidth: 160,
-            frameHeight: 111
-        })
-
-        this.load.spritesheet('king_e','Medieval King/Sprites/Attack2.png',
-        {
-            frameWidth: 160,
-            frameHeight: 111
-        })
+        // this.load.spritesheet('nami_e','Medieval nami/Sprites/Attack2.png',
+        // {
+        //     frameWidth: 160,
+        //     frameHeight: 111
+        // })
         
         // this.load.spritesheet('antorchab','antorchab/antorchab/antorchab.png',
         // {
@@ -118,100 +118,100 @@ class Level extends Phaser.Scene{
         this.suelo.body.setSize(100000, 55, true);
         //visible false
         this.suelo.setVisible(false);
-        //FISICAS KING
-        //this.king = this.add.sprite(300, 520, 'king', 0).setScale(5);
-        this.king = this.physics.add.image(1000, 520, 'king').setScale(5);
-        //this.physics.add.existing(this.king, true); //FORMA2 true
-        this.king.body.setCollideWorldBounds(false);
-        // this.king.body.setCircle(25);
-        // this.king.body.setSquare(25);
-        this.king.body.setSize(35, 53, true);
-        this.king.body.setOffset(62, 52);
-        this.physics.add.collider(this.king, this.suelo, () => {
+        //FISICAS nami
+        //this.nami = this.add.sprite(300, 520, 'nami', 0).setScale(5);
+        this.nami = this.physics.add.image(1000, 520, 'nami').setScale(5);
+        //this.physics.add.existing(this.nami, true); //FORMA2 true
+        this.nami.body.setCollideWorldBounds(false);
+        // this.nami.body.setCircle(25);
+        // this.nami.body.setSquare(25);
+        this.nami.body.setSize(35, 53, true);
+        this.nami.body.setOffset(62, 52);
+        this.physics.add.collider(this.nami, this.suelo, () => {
             //this.yoshi.setVelocity(0);
             //this.yoshi.setAcceleration(0);
         });
-        // this.king = this.physics.add.image(300, 720, 'king');
-        // this.king.body.setAllowGravity(false);
+        // this.nami = this.physics.add.image(300, 720, 'nami');
+        // this.nami.body.setAllowGravity(false);
         //this.text = this.add.text(500, 250, 'PRESIONA\t[→] [D]', {
         //     fontFamily: 'Consolas', fontSize: '30px'
         // }).setDepth(10);
 
-        //Animaciones del personaje king
+        //Animaciones del personaje nami
         this.anims.create({
             // Nombre de la animación
-            key: 'king_idle',
+            key: 'nami_idle',
             // Se cargan los frames por números
             // NOTA: generateFrameNames() se
             // usa cuando ya existe un Atlas
-            frames: this.anims.generateFrameNumbers('king', {
+            frames: this.anims.generateFrameNumbers('nami', {
                 start: 0,
-                end: 7
+                end: 10
             }),
             
             repeat: -1,
             frameRate: 6
         });
 
-        //this.king.anims.play('king_idle');
+        //this.nami.anims.play('nami_idle');
+
+        // this.anims.create({
+        //     // Nombre de la animación
+        //     key: 'nami_run',
+        //     // Se cargan los frames por números
+        //     // NOTA: generateFrameNames() se
+        //     // usa cuando ya existe un Atlas
+        //     frames: this.anims.generateFrameNumbers('nami_r', {
+        //         start: 0,
+        //         end: 7
+        //     }),
+        //     repeat: -1,
+        //     frameRate: 6
+        // });
 
         this.anims.create({
             // Nombre de la animación
-            key: 'king_run',
+            key: 'nami_jump',
             // Se cargan los frames por números
             // NOTA: generateFrameNames() se
             // usa cuando ya existe un Atlas
-            frames: this.anims.generateFrameNumbers('king_r', {
+            frames: this.anims.generateFrameNumbers('nami_j', {
                 start: 0,
-                end: 7
-            }),
-            repeat: -1,
-            frameRate: 6
-        });
-
-        this.anims.create({
-            // Nombre de la animación
-            key: 'king_jump',
-            // Se cargan los frames por números
-            // NOTA: generateFrameNames() se
-            // usa cuando ya existe un Atlas
-            frames: this.anims.generateFrameNumbers('king_j', {
-                start: 0,
-                end: 1
+                end: 2
             }),
             repeat: -1,
             frameRate: 1
         });
 
-        this.anims.create({
-            // Nombre de la animación
-            key: 'king_attack',
-            // Se cargan los frames por números
-            // NOTA: generateFrameNames() se
-            // usa cuando ya existe un Atlas
-            frames: this.anims.generateFrameNumbers('king_q', {
-                start: 0,
-                end: 3
-            }),
-            repeat: 0,
-            frameRate: 2
-        });
+        // this.anims.create({
+        //     // Nombre de la animación
+        //     key: 'nami_attack',
+        //     // Se cargan los frames por números
+        //     // NOTA: generateFrameNames() se
+        //     // usa cuando ya existe un Atlas
+        //     frames: this.anims.generateFrameNumbers('nami_q', {
+        //         start: 0,
+        //         end: 3
+        //     }),
+        //     repeat: 0,
+        //     frameRate: 2
+        // });
 
-        this.anims.create({
-            // Nombre de la animación
-            key: 'king_attack2',
-            // Se cargan los frames por números
-            // NOTA: generateFrameNames() se
-            // usa cuando ya existe un Atlas
-            frames: this.anims.generateFrameNumbers('king_e', {
-                start: 0,
-                end: 3
-            }),
-            repeat: 0,
-            frameRate: 2
-        });
+        // this.anims.create({
+        //     // Nombre de la animación
+        //     key: 'nami_attack2',
+        //     // Se cargan los frames por números
+        //     // NOTA: generateFrameNames() se
+        //     // usa cuando ya existe un Atlas
+        //     frames: this.anims.generateFrameNumbers('nami_e', {
+        //         start: 0,
+        //         end: 3
+        //     }),
+        //     repeat: 0,
+        //     frameRate: 2
+        // });
         this.cameras.main.setSize(1920,1080);
-        this.cameras.main.startFollow(this.king);
+        this.cameras.main.startFollow(this.nami);
         // this.anims.create({
         //     // Nombre de la animación
         //     key: 'antorchab_iddle',
@@ -237,54 +237,54 @@ class Level extends Phaser.Scene{
         });
 
         this.teclas.izq.on('down', ()=>{
-                this.king.flipX = true;
-                ////this.king.anims.play('king_run');
-                this.king.body.setAcceleration(0);
+                this.nami.flipX = true;
+                ////this.nami.anims.play('nami_run');
+                this.nami.body.setAcceleration(0);
         });
         this.teclas.izq.on('up', ()=>{
-            //this.king.anims.stop();
-            //this.king.anims.play('king_idle');
-            this.king.body.setAcceleration(0);
-            this.king.body.setVelocity(0);
+            //this.nami.anims.stop();
+            this.nami.anims.play('nami_idle');
+            this.nami.body.setAcceleration(0);
+            this.nami.body.setVelocity(0);
         });
 
         this.teclas.der.on('down', ()=>{
-            this.king.flipX = false;
-            //this.king.anims.play('king_run');
-            this.king.body.setAcceleration(0);
-            this.king.body.setVelocity(0);
+            this.nami.flipX = false;
+            //this.nami.anims.play('nami_run');
+            this.nami.body.setAcceleration(0);
+            this.nami.body.setVelocity(0);
         });
         this.teclas.der.on('up', ()=>{
-            //this.king.anims.stop();
-            //this.king.anims.play('king_idle');
-            this.king.body.setAcceleration(0);
-            this.king.body.setVelocity(0);
+            //this.nami.anims.stop();
+            this.nami.anims.play('nami_idle');
+            this.nami.body.setAcceleration(0);
+            this.nami.body.setVelocity(0);
         });
 
         this.teclas.powQ.on('down', ()=>{
-            this.king.play('king_attack');
+            this.nami.play('nami_attack');
         });
         this.teclas.powQ.on('up', ()=>{
-            //this.king.anims.stop();
-            //this.king.play('king_idle');
+            //this.nami.anims.stop();
+            //this.nami.play('nami_idle');
         });
 
         this.teclas.powR.on('down', ()=>{
-            this.king.play('king_attack2');
+            this.nami.play('nami_attack2');
         });
         this.teclas.powR.on('up', ()=>{
-            //this.king.anims.stop();
-            //this.king.play('king_idle');
+            //this.nami.anims.stop();
+            //this.nami.play('nami_idle');
         });
 
         this.teclas.kspc.on('down', ()=>{
-            //this.king.play('king_jump');
-            this.king.body.setVelocityY(-800);
+            //this.nami.play('nami_jump');
+            this.nami.body.setVelocityY(-800);
         });
         this.teclas.kspc.on('up', ()=>{
-            //this.king.anims.stop();
-            //this.king.play('king_idle');
-            this.king.body.setVelocityY(800);
+            //this.nami.anims.stop();
+            //this.nami.play('nami_idle');
+            this.nami.body.setVelocityY(800);
         });
 
         // this.teclas.powX.on('down', ()=>{
@@ -298,7 +298,7 @@ class Level extends Phaser.Scene{
         //             // this.scene.start("Room4", {
         //             // });
 
-        //                     // if(this.teclas.kspc.isDown && this.king.x >= 300 && this.king.x <= 300 + 50)
+        //                     // if(this.teclas.kspc.isDown && this.nami.x >= 300 && this.nami.x <= 300 + 50)
         // // {
         // //     this.puertas[0].anims.play('puerta');
         // //     this.cameras.main
@@ -377,9 +377,9 @@ class Level extends Phaser.Scene{
         //     this.physics.add.existing(block, true); //FORMA2 true
         //     block.setImmovable();
         // } );
-        // this.physics.add.collider(this.king, this.grupoO, () => {
-        //     // this.king.setVelocity(0);
-        //     // this.king.setAcceleration(0);
+        // this.physics.add.collider(this.nami, this.grupoO, () => {
+        //     // this.nami.setVelocity(0);
+        //     // this.nami.setAcceleration(0);
         //     console.log("colision rey con bloque largo");
         // });
         // //2d0 grupo de linea de bloques
@@ -397,9 +397,9 @@ class Level extends Phaser.Scene{
         //     this.physics.add.existing(block, true); //FORMA2 true
         //     block.setImmovable();
         // } );
-        // this.physics.add.collider(this.king, this.grupoO2, () => {
-        //     // this.king.setVelocity(0);
-        //     // this.king.setAcceleration(0);
+        // this.physics.add.collider(this.nami, this.grupoO2, () => {
+        //     // this.nami.setVelocity(0);
+        //     // this.nami.setAcceleration(0);
         //     console.log("colision rey con bloque largo");
         // });
         // //3er grupo de linea de bloques
@@ -417,9 +417,9 @@ class Level extends Phaser.Scene{
         //     this.physics.add.existing(block, true); //FORMA2 true
         //     block.setImmovable();
         // } );
-        // this.physics.add.collider(this.king, this.grupoO3, () => {
-        //     // this.king.setVelocity(0);
-        //     // this.king.setAcceleration(0);
+        // this.physics.add.collider(this.nami, this.grupoO3, () => {
+        //     // this.nami.setVelocity(0);
+        //     // this.nami.setAcceleration(0);
         //     console.log("colision rey con bloque");
         // });
    
@@ -442,9 +442,9 @@ class Level extends Phaser.Scene{
             pincho.setImmovable(true);
             //pincho.body.setOffset(62, 50);
         } );
-        this.physics.add.collider(this.king, this.grupoO4, () => {
-            // this.king.setVelocity(0);
-            // this.king.setAcceleration(0);
+        this.physics.add.collider(this.nami, this.grupoO4, () => {
+            // this.nami.setVelocity(0);
+            // this.nami.setAcceleration(0);
             console.log("colision rey con pinchos");
             this.cameras.main
             .setBackgroundColor(0x000000)
@@ -475,8 +475,8 @@ class Level extends Phaser.Scene{
 
         if (this.teclas.izq.isDown)
         {
-            if (this.king.x <= 100) {
-                this.king.x = 100;
+            if (this.nami.x <= 100) {
+                this.nami.x = 100;
             }
 
             if (this.bgs[0].x <= 0) {
@@ -494,13 +494,13 @@ class Level extends Phaser.Scene{
         if (this.teclas.der.isDown)
         {
             if(!this.teclas.izq.isDown){
-                this.king.x += 3;
+                this.nami.x += 3;
                 this.grupo.children.iterate( (corazon) => {
-                    corazon.x = (-800 + this.king.x ) + (y*100);
+                    corazon.x = (-800 + this.nami.x ) + (y*100);
                     y++;
                 } );
                 this.grupo2.children.iterate( (pocion) => {
-                    pocion.x = (800 + this.king.x) - (x*100);
+                    pocion.x = (800 + this.nami.x) - (x*100);
                     x++;
                 } );
                 if (this.bgs[0].x <= 0) {
@@ -521,8 +521,8 @@ class Level extends Phaser.Scene{
             // this.grupo2[3].x += 2;
             // this.grupo2[4].x += 2;
             // this.grupo2[5].x += 2;
-            // if (this.king.x >= 1820) {
-            //     this.king.x = 1820;
+            // if (this.nami.x >= 1820) {
+            //     this.nami.x = 1820;
             // }
 /////////////////////
             
@@ -553,18 +553,18 @@ class Level extends Phaser.Scene{
         if (this.teclas.izq.isDown)
         {
             if(!this.teclas.der.isDown){
-                this.king.x -= 3;
+                this.nami.x -= 3;
                 this.grupo.children.iterate( (corazon) => {
-                    corazon.x = (-800 + this.king.x) + (y*100);
+                    corazon.x = (-800 + this.nami.x) + (y*100);
                     y++;
                 } );
                 this.grupo2.children.iterate( (pocion) => {
-                    pocion.x = (800 + this.king.x) - (x*100);
+                    pocion.x = (800 + this.nami.x) - (x*100);
                     x++;
                 } );
             }
-            // if (this.king.x <= 100) {
-            //     this.king.x = 100;
+            // if (this.nami.x <= 100) {
+            //     this.nami.x = 100;
             // }
 
             if (this.bgs[0].x <= 0) {
@@ -602,7 +602,7 @@ class Level extends Phaser.Scene{
         if (this.teclas.kspc.isDown) {
             
         }
-        if(this.teclas.kspc.isDown && this.king.x >= 300+300 && this.king.x <= 300 + 50+300)
+        if(this.teclas.kspc.isDown && this.nami.x >= 300+300 && this.nami.x <= 300 + 50+300)
         {
             // setInterval(() => {
             //     console.log("esta haciendo algo");
@@ -623,8 +623,8 @@ class Level extends Phaser.Scene{
        
             
         }
-        // if(this.king.x >= 450 && //this.grupo.getChildren()[0].x
-        // this.king.x <= 450 + 50) //this.grupo.getChildren()[0].x
+        // if(this.nami.x >= 450 && //this.grupo.getChildren()[0].x
+        // this.nami.x <= 450 + 50) //this.grupo.getChildren()[0].x
         // {
         //     //this.grupoC.getChildren()[0].destroy();
         //     this.grupo.children.iterate( (corazon) => {
@@ -634,20 +634,20 @@ class Level extends Phaser.Scene{
         //     //this.grupo.getChildren()[1].destroy();
         // }
         
-        if(this.king.x >= 750 && this.king.x <= 750 + 50)
+        if(this.nami.x >= 750 && this.nami.x <= 750 + 50)
         {
             //     this.grupoC.getChildren()[0].visible = false;
 
             // this.grupo.getChildren()[3].visible = true;
         }
-        if(this.king.x >= 1350 && this.king.x <= 1350 + 50) 
+        if(this.nami.x >= 1350 && this.nami.x <= 1350 + 50) 
         {
 
             //     this.grupoC.getChildren()[1].visible = false;
 
             // this.grupo.getChildren()[4].visible = true;
         }
-        if(this.king.x >= 1800 && this.king.x <= 1800 + 50)
+        if(this.nami.x >= 1800 && this.nami.x <= 1800 + 50)
         {
 
             //     this.grupoC.getChildren()[2].visible = false;

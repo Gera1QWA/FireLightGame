@@ -26,7 +26,9 @@ class Level extends Phaser.Scene{
         this.load.image('cuadrodragon', 'scenalevel/cuadrodragon.png');
         this.load.image('puertaclosed', 'scenalevel/puertaclosed.png');
 
-        this.load.spritesheet('nami','Nami/IdlegOOD.png',
+
+        //AQUI SE CREA EL SPRITESHEET
+        this.load.spritesheet('nami','Nami/idlegOOD.png',
         {
             frameWidth: 180,
             frameHeight: 180
@@ -38,11 +40,11 @@ class Level extends Phaser.Scene{
         //     frameHeight: 111,
         // })
 
-        this.load.spritesheet('nami_j','Nami/JumpgOOD.png',
-        {
-            frameWidth: 135,
-            frameHeight: 180,
-        })
+        // this.load.spritesheet('nami_j','Nami/jumpgOOD.png',
+        // {
+        //     frameWidth: 135,
+        //     frameHeight: 180,
+        // })
 
         // this.load.spritesheet('nami_q','Medieval nami/Sprites/Attack1.png',
         // {
@@ -120,7 +122,7 @@ class Level extends Phaser.Scene{
         this.suelo.setVisible(false);
         //FISICAS nami
         //this.nami = this.add.sprite(300, 520, 'nami', 0).setScale(5);
-        this.nami = this.physics.add.image(1000, 520, 'nami').setScale(5);
+        this.nami = this.physics.add.sprite(1000, 520, 'nami').setScale(5);//AQUI SE AGREGA EL SPRITE
         //this.physics.add.existing(this.nami, true); //FORMA2 true
         this.nami.body.setCollideWorldBounds(false);
         // this.nami.body.setCircle(25);
@@ -150,8 +152,10 @@ class Level extends Phaser.Scene{
             }),
             
             repeat: -1,
-            frameRate: 6
+            frameRate: 10
         });
+
+        this.nami.anims.play('nami_idle');
 
         //this.nami.anims.play('nami_idle');
 
@@ -169,19 +173,19 @@ class Level extends Phaser.Scene{
         //     frameRate: 6
         // });
 
-        this.anims.create({
-            // Nombre de la animación
-            key: 'nami_jump',
-            // Se cargan los frames por números
-            // NOTA: generateFrameNames() se
-            // usa cuando ya existe un Atlas
-            frames: this.anims.generateFrameNumbers('nami_j', {
-                start: 0,
-                end: 2
-            }),
-            repeat: -1,
-            frameRate: 1
-        });
+        // this.anims.create({
+        //     // Nombre de la animación
+        //     key: 'nami_jump',
+        //     // Se cargan los frames por números
+        //     // NOTA: generateFrameNames() se
+        //     // usa cuando ya existe un Atlas
+        //     frames: this.anims.generateFrameNumbers('nami_j', {
+        //         start: 0,
+        //         end: 2
+        //     }),
+        //     repeat: -1,
+        //     frameRate: 11
+        // });
 
         // this.anims.create({
         //     // Nombre de la animación
@@ -243,7 +247,7 @@ class Level extends Phaser.Scene{
         });
         this.teclas.izq.on('up', ()=>{
             //this.nami.anims.stop();
-            this.nami.anims.play('nami_idle');
+            // this.nami.anims.play('nami_idle');
             this.nami.body.setAcceleration(0);
             this.nami.body.setVelocity(0);
         });

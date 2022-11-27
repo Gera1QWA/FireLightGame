@@ -45,6 +45,11 @@ class Level extends Phaser.Scene{
             frameWidth: 180,
             frameHeight: 180,
         })
+        this.load.spritesheet('nami_fall','Nami/fallgOOD.png',
+        {
+            frameWidth: 180,
+            frameHeight: 180,
+        })
 
         // this.load.spritesheet('nami_q','Medieval nami/Sprites/Attack1.png',
         // {
@@ -234,19 +239,29 @@ class Level extends Phaser.Scene{
         //Creacion Antorchas
         this.antorchas = [];
         for(let index = 0; index < 10; index++) {
-            this.antorchas[index] = this.add.sprite((index*430 )+ 100, 360, 'antorchab', 0);
+            this.antorchas[index] = this.add.sprite((index*1100 )+200, 300, 'antorchab');
             // this.antorchas[index] = this.add.image(index*230, 420, "antorchab1").setOrigin(1, 1).setDepth(0);
             this.antorchas[index].setScale(4);
         }
-        //Creacion cuadro
-        this.cuadro = this.add.image(1200, 400, 'cuadro').setScale(0.15).setDepth(0);
+        //Creacion cuadros
+        //this.cuadro = this.add.image(1200, 400, 'cuadro').setScale(0.15).setDepth(0);
+        this.cuadros = [];
+        for(let index = 0; index < 10; index++) {
+            // this.puertas[index] = this.add.image(index*1000, 770, "puertaCerrada").setOrigin(1, 1).setDepth(0);
+            //this.puertas[index].setScale(0.6);
+            // if(index%2==0){
+                this.cuadros[index] = this.add.image((index*1100)+220, 580, "cuadro").setDepth(0);
+                this.cuadros[index].setScale(0.25);
+            // }
+        }
+
         //Creacion Puertas
         this.puertas = [];
         for(let index = 0; index < 10; index++) {
             // this.puertas[index] = this.add.image(index*1000, 770, "puertaCerrada").setOrigin(1, 1).setDepth(0);
             //this.puertas[index].setScale(0.6);
             // if(index%2==0){
-                this.puertas[index] = this.add.sprite((index*1100)+600, 530, "puertaclosed").setDepth(0);
+                this.puertas[index] = this.add.sprite((index*1100)+650, 530, "puertaclosed").setDepth(0);
                 this.puertas[index].setScale(2.4);
             // }
         }
@@ -318,6 +333,20 @@ class Level extends Phaser.Scene{
             // NOTA: generateFrameNames() se
             // usa cuando ya existe un Atlas
             frames: this.anims.generateFrameNumbers('nami_jump', {
+                start: 0,
+                end: 2
+            }),
+            repeat: 1,
+            frameRate: 11
+        });
+
+        this.anims.create({
+            // Nombre de la animación
+            key: 'nami_fall',
+            // Se cargan los frames por números
+            // NOTA: generateFrameNames() se
+            // usa cuando ya existe un Atlas
+            frames: this.anims.generateFrameNumbers('nami_fall', {
                 start: 0,
                 end: 2
             }),
